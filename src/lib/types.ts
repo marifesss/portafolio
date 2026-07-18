@@ -50,6 +50,25 @@ export interface MediaItem {
   poster?: string;
 }
 
+/** An architecture diagram in the "Cómo se hizo" tab. */
+export interface DiagramItem {
+  /** Path in /public; when absent a `DiagramPlaceholder` frame is shown. */
+  src?: string;
+  /** Caption / title shown under the frame (also the image alt text). */
+  caption: Localized;
+}
+
+/**
+ * "Cómo se hizo" — the making-of narrative for a project's engineering tab:
+ * how it was architected, plus optional diagrams (real or placeholder).
+ */
+export interface ProjectMaking {
+  /** Paragraphs separated by a blank line ("\n\n"), like `description`. */
+  narrative: Localized;
+  /** Architecture diagrams; each renders a real image or a placeholder frame. */
+  diagrams?: DiagramItem[];
+}
+
 export interface Project {
   /** URL segment: /proyectos/[slug] */
   slug: string;
@@ -71,6 +90,11 @@ export interface Project {
   cover?: string;
   /** Screenshots / video shown in the detail-view gallery. */
   media?: MediaItem[];
+  /**
+   * Engineering write-up for the "Cómo se hizo" tab. When present the detail
+   * view splits into "Resumen" / "Cómo se hizo" tabs; otherwise it's one page.
+   */
+  making?: ProjectMaking;
 }
 
 /* ------------------------------------------------------------------ */

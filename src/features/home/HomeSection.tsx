@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 import { site } from "@/content/site";
 import { greetings, featuredSlugs, home, type Daypart } from "@/content/home";
 import { getProjectBySlug } from "@/content/projects";
 import { AlbumArtPlaceholder } from "@/components/ui/AlbumArtPlaceholder";
 import { Card } from "@/components/ui/Card";
+import { hueFor } from "@/features/projects/covers";
 import {
   SectionTransition,
   useSectionMotion,
@@ -22,19 +23,25 @@ function daypartFor(hour: number): Daypart {
   return "evening";
 }
 
+/** The daypart never changes after mount, so there's nothing to subscribe to. */
+const noopSubscribe = () => () => {};
+/** SSR + first client (hydration) render: a stable default, so they agree. */
+const getServerDaypart = (): Daypart => "afternoon";
+/** After hydration: the visitor's real local daypart. */
+const getClientDaypart = (): Daypart => daypartFor(new Date().getHours());
+
 /**
- * Visitor's current daypart. Starts at a stable default so the server and the
- * client's first render agree (no hydration mismatch), then corrects to the
- * visitor's real local time after mount.
+ * Visitor's current daypart. Renders the stable default during SSR/hydration
+ * (no mismatch), then swaps to the visitor's real local time on the client —
+ * via `useSyncExternalStore`, so there's no post-mount `setState`.
  */
 function useDaypart(): Daypart {
-  const [daypart, setDaypart] = useState<Daypart>("afternoon");
-  useEffect(() => setDaypart(daypartFor(new Date().getHours())), []);
-  return daypart;
+  return useSyncExternalStore(
+    noopSubscribe,
+    getClientDaypart,
+    getServerDaypart,
+  );
 }
-
-/** Distinct accent hue per featured cover (green / violet / blue). */
-const COVER_HUES = [145, 275, 210];
 
 export function HomeSection() {
   const { pick, t } = useLanguage();
@@ -77,7 +84,7 @@ export function HomeSection() {
         initial="hidden"
         animate="visible"
       >
-        {featured.map((project, i) => (
+        {featured.map((project) => (
           <motion.li key={project.slug} variants={m.staggerItem}>
             <Link href={`/proyectos/${project.slug}`} className="block h-full">
               <Card className="flex h-full flex-col">
@@ -85,7 +92,7 @@ export function HomeSection() {
                   <AlbumArtPlaceholder
                     fill
                     glyph={project.comingSoon ? "🔒" : "🎵"}
-                    hue={COVER_HUES[i % COVER_HUES.length]}
+                    hue={hueFor(project.slug)}
                     label={project.title}
                   />
                   {/* Hover play affordance (decorative; the whole card links). */}
