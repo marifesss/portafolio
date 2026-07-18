@@ -9,9 +9,19 @@ export const experience: Experience[] = [
       en: "Sales Intelligence Intern",
     },
     period: {
+      // TODO: update the end date once the internship end is confirmed.
       es: "Agosto 2025 — presente",
       en: "August 2025 — present",
     },
+    scope: {
+      es: "Todas las regiones de Venezuela",
+      en: "All regions of Venezuela",
+    },
+    reach: {
+      es: "~100 usuarios (representantes, líderes y gerentes)",
+      en: "~100 users (reps, sales leaders, and managers)",
+    },
+    tools: ["SQL Server DW", "ETL", "SQL", "Power BI"],
     description: {
       es: "Como pasante de Inteligencia de Ventas en Mondelēz Venezuela, trabajo directamente sobre el Data Warehouse en SQL Server, con acceso a la data de todas las regiones del país donde opera la compañía. Los distribuidores alimentan sus bases de datos transaccionales, que se integran al DW mediante ETL; desde ahí, desarrollo consultas SQL complejas para validar información y responder solicitudes estratégicas de gerencia. Mis reportes son utilizados por aproximadamente 100 personas entre representantes, líderes de venta y gerentes en Venezuela.",
       en: "As a Sales Intelligence intern at Mondelēz Venezuela, I work directly with the SQL Server Data Warehouse, with access to data across all regions where the company operates. Distributors feed their transactional databases, which are integrated into the DW via ETL; from there, I write complex SQL queries to validate data and respond to strategic requests from management. My reports are used by approximately 100 people across representatives, sales leaders, and managers in Venezuela.",
