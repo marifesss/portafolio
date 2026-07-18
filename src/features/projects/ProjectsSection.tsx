@@ -26,14 +26,19 @@ export function ProjectsSection() {
       >
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-end">
           <div className="w-36 max-w-full shrink-0 sm:w-52">
-            <AlbumArtPlaceholder fill glyph="🎧" hue={145} label="Proyectos" />
+            <AlbumArtPlaceholder
+              fill
+              glyph="🎧"
+              hue={145}
+              label={t.projectsTitle}
+            />
           </div>
           <div className="text-center sm:text-left">
             <p className="text-xs font-semibold uppercase tracking-widest text-muted">
               {t.playlist}
             </p>
             <h1 className="mt-2 text-4xl font-black tracking-tight text-white sm:text-6xl">
-              Proyectos
+              {t.projectsTitle}
             </h1>
             <p className="mt-4 text-sm text-muted">
               <span className="font-semibold text-white">{site.name}</span>
