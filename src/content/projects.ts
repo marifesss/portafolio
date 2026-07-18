@@ -65,6 +65,7 @@ export const projects: Project[] = [
   {
     slug: "arrowmaze",
     title: "ArrowMaze",
+    cover: "/images/arrowmaze/portadaAlbum.jpeg",
     role: {
       es: "Developer — Game Domain & Engine",
       en: "Developer — Game Domain & Engine",
