@@ -1,6 +1,6 @@
 # 07 — Inicio (Home): hero + featured projects
 
-**Status:** open
+**Status:** done
 **Type:** feature
 **Depends on:** 02, 03
 
@@ -11,15 +11,15 @@ cards into the strongest projects. Include a subtle "available for internship"
 signal.
 
 ## Tasks
-- [ ] Add any needed Home copy to `src/content` (greeting variants for
+- [x] Add any needed Home copy to `src/content` (greeting variants for
       morning/afternoon/evening in ES/EN; availability line) — content as data.
-- [ ] Add UI labels to `src/i18n/dictionary.ts` as needed.
-- [ ] Build `HomeSection`: time-aware greeting ("Buenas tardes"/"Good afternoon"),
+- [x] Add UI labels to `src/i18n/dictionary.ts` as needed.
+- [x] Build `HomeSection`: time-aware greeting ("Buenas tardes"/"Good afternoon"),
       name, long tagline, availability chip/line.
-- [ ] Featured-projects grid: cards for Yelou, ArrowMaze, Partela (pull from
+- [x] Featured-projects grid: cards for Yelou, ArrowMaze, Partela (pull from
       `projects` content; use `AlbumArtPlaceholder` for missing art) linking to
       their detail pages.
-- [ ] Apply shared motion (stagger-in cards, hero fade).
+- [x] Apply shared motion (stagger-in cards, hero fade).
 
 ## Acceptance criteria
 - Home greets by time of day and shows name + tagline, bilingual.
