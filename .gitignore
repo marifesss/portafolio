@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# windows
+desktop.ini
+
+# claude code local settings
+.claude/settings.local.json
