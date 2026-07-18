@@ -34,7 +34,7 @@ export function Sidebar() {
                 className={`flex items-center gap-4 rounded-md px-3 py-2 font-semibold transition-colors ${
                   active
                     ? "bg-white/10 text-white"
-                    : "text-zinc-400 hover:text-white"
+                    : "text-muted hover:text-white"
                 }`}
               >
                 <span aria-hidden className="text-base">
@@ -47,7 +47,7 @@ export function Sidebar() {
         })}
       </ul>
 
-      <p className="mt-auto px-3 py-2 text-xs text-zinc-600">
+      <p className="mt-auto px-3 py-2 text-xs text-faint">
         {t.playlist} · {site.domain}
       </p>
     </nav>

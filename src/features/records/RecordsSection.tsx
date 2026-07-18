@@ -26,7 +26,7 @@ export function RecordsSection() {
             </span>
             <div>
               <h2 className="font-bold text-white">{pick(record.title)}</h2>
-              <p className="mt-1 text-sm leading-relaxed text-zinc-300">
+              <p className="mt-1 text-sm leading-relaxed text-muted">
                 {pick(record.description)}
               </p>
             </div>

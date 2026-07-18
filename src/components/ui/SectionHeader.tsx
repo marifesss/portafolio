@@ -20,7 +20,7 @@ export function SectionHeader({
   return (
     <header className="bg-gradient-to-b from-spotify/25 to-transparent px-6 pb-8 pt-16 sm:px-10">
       {eyebrow && (
-        <p className="text-xs font-semibold uppercase tracking-widest text-zinc-300">
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted">
           {eyebrow}
         </p>
       )}
@@ -28,7 +28,7 @@ export function SectionHeader({
         {title}
       </h1>
       {subtitle && (
-        <p className="mt-4 max-w-2xl text-zinc-300">{subtitle}</p>
+        <p className="mt-4 max-w-2xl text-muted">{subtitle}</p>
       )}
       {children && <div className="mt-4">{children}</div>}
     </header>

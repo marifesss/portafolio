@@ -24,7 +24,7 @@ export function ProjectsSection() {
               href={`/proyectos/${project.slug}`}
               className="group grid grid-cols-[2rem_1fr_auto] items-center gap-4 rounded-md px-3 py-3 transition-colors hover:bg-white/10"
             >
-              <span className="text-right text-sm text-zinc-500 group-hover:text-white">
+              <span className="text-right text-sm text-faint group-hover:text-white">
                 {index + 1}
               </span>
 
@@ -39,12 +39,12 @@ export function ProjectsSection() {
                     </span>
                   )}
                 </span>
-                <span className="block truncate text-sm text-zinc-400">
+                <span className="block truncate text-sm text-muted">
                   {pick(project.role)}
                 </span>
               </span>
 
-              <span className="hidden text-sm text-zinc-500 sm:block">
+              <span className="hidden text-sm text-faint sm:block">
                 {pick(project.meta)}
               </span>
             </Link>

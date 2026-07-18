@@ -13,7 +13,7 @@ export function ProjectDetail({ project }: { project: Project }) {
   return (
     <article>
       <SectionHeader eyebrow={pick(project.meta)} title={project.title}>
-        <p className="text-lg font-semibold text-zinc-200">
+        <p className="text-lg font-semibold text-white">
           {pick(project.role)}
         </p>
       </SectionHeader>
@@ -21,7 +21,7 @@ export function ProjectDetail({ project }: { project: Project }) {
       <div className="space-y-8 px-6 pb-12 sm:px-10">
         <Link
           href="/proyectos"
-          className="inline-flex text-sm text-zinc-400 transition-colors hover:text-white"
+          className="inline-flex text-sm text-muted transition-colors hover:text-white"
         >
           ← {t.backToProjects}
         </Link>
@@ -29,14 +29,14 @@ export function ProjectDetail({ project }: { project: Project }) {
         {pick(project.description)
           .split("\n\n")
           .map((paragraph, i) => (
-            <p key={i} className="max-w-2xl leading-relaxed text-zinc-300">
+            <p key={i} className="max-w-2xl leading-relaxed text-muted">
               {paragraph}
             </p>
           ))}
 
         {project.stack.length > 0 && (
           <div>
-            <h2 className="mb-3 text-sm font-bold uppercase tracking-widest text-zinc-400">
+            <h2 className="mb-3 text-sm font-bold uppercase tracking-widest text-muted">
               {t.stack}
             </h2>
             <div className="flex flex-wrap gap-2">
@@ -57,7 +57,7 @@ export function ProjectDetail({ project }: { project: Project }) {
         ) : (
           project.links.length > 0 && (
             <div>
-              <h2 className="mb-3 text-sm font-bold uppercase tracking-widest text-zinc-400">
+              <h2 className="mb-3 text-sm font-bold uppercase tracking-widest text-muted">
                 {t.links}
               </h2>
               <ul className="flex flex-wrap gap-3">
