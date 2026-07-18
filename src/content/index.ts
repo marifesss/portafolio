@@ -5,6 +5,7 @@
  */
 export { site } from "./site";
 export { navigation } from "./navigation";
+export { greetings, featuredSlugs, home } from "./home";
 export { profile } from "./profile";
 export { projects, getProjectBySlug } from "./projects";
 export { experience } from "./experience";
