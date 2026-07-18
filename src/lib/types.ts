@@ -38,6 +38,18 @@ export interface ProjectLink {
   href: string;
 }
 
+/** A screenshot or video shown in a project's gallery. */
+export interface MediaItem {
+  /** `image` renders an optimized picture; `video` a native player. */
+  type: "image" | "video";
+  /** Path in /public. */
+  src: string;
+  /** Caption shown under the frame (also used as the image alt text). */
+  caption: Localized;
+  /** Poster frame for videos. */
+  poster?: string;
+}
+
 export interface Project {
   /** URL segment: /proyectos/[slug] */
   slug: string;
@@ -57,6 +69,8 @@ export interface Project {
   comingSoon?: boolean;
   /** Optional cover art path in /public. */
   cover?: string;
+  /** Screenshots / video shown in the detail-view gallery. */
+  media?: MediaItem[];
 }
 
 /* ------------------------------------------------------------------ */

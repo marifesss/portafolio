@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Project } from "@/lib/types";
 import { Chip } from "@/components/ui/Chip";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { ProjectGallery } from "@/features/projects/ProjectGallery";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 /** /proyectos/[slug] — a single "track" opened as an album view. */
@@ -45,6 +46,10 @@ export function ProjectDetail({ project }: { project: Project }) {
               ))}
             </div>
           </div>
+        )}
+
+        {project.media && project.media.length > 0 && (
+          <ProjectGallery media={project.media} title={project.title} />
         )}
 
         {project.comingSoon ? (
