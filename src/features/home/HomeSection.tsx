@@ -6,9 +6,8 @@ import { motion } from "framer-motion";
 import { site } from "@/content/site";
 import { greetings, featuredSlugs, home, type Daypart } from "@/content/home";
 import { getProjectBySlug } from "@/content/projects";
-import { AlbumArtPlaceholder } from "@/components/ui/AlbumArtPlaceholder";
 import { Card } from "@/components/ui/Card";
-import { hueFor } from "@/features/projects/covers";
+import { ProjectCover } from "@/features/projects/ProjectCover";
 import {
   SectionTransition,
   useSectionMotion,
@@ -89,12 +88,7 @@ export function HomeSection() {
             <Link href={`/proyectos/${project.slug}`} className="block h-full">
               <Card className="flex h-full flex-col">
                 <div className="relative mb-4">
-                  <AlbumArtPlaceholder
-                    fill
-                    glyph={project.comingSoon ? "🔒" : "🎵"}
-                    hue={hueFor(project.slug)}
-                    label={project.title}
-                  />
+                  <ProjectCover fill project={project} label={project.title} />
                   {/* Hover play affordance (decorative; the whole card links). */}
                   <span
                     aria-hidden

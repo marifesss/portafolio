@@ -7,7 +7,7 @@ import { site } from "@/content/site";
 import { AlbumArtPlaceholder } from "@/components/ui/AlbumArtPlaceholder";
 import { Badge } from "@/components/ui/Badge";
 import { useSectionMotion } from "@/components/motion/SectionTransition";
-import { hueFor } from "@/features/projects/covers";
+import { ProjectCover } from "@/features/projects/ProjectCover";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 /** The "Proyectos" playlist: a Spotify-style track list of projects. */
@@ -85,11 +85,7 @@ export function ProjectsSection() {
 
                 {/* Cover thumbnail + title + role ("artist"). */}
                 <span className="flex min-w-0 items-center gap-3">
-                  <AlbumArtPlaceholder
-                    size={40}
-                    glyph={project.comingSoon ? "🔒" : "🎵"}
-                    hue={hueFor(project.slug)}
-                  />
+                  <ProjectCover project={project} size={40} />
                   <span className="min-w-0">
                     <span className="flex items-center gap-2">
                       <span className="truncate font-semibold text-white group-hover:underline">

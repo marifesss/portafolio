@@ -5,12 +5,11 @@ import Image from "next/image";
 import { useState } from "react";
 import type { Project } from "@/lib/types";
 import { Chip } from "@/components/ui/Chip";
-import { AlbumArtPlaceholder } from "@/components/ui/AlbumArtPlaceholder";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { DiagramPlaceholder } from "@/components/ui/DiagramPlaceholder";
 import { ProjectGallery } from "@/features/projects/ProjectGallery";
 import { ComingSoonDetail } from "@/features/projects/ComingSoonDetail";
-import { hueFor } from "@/features/projects/covers";
+import { ProjectCover } from "@/features/projects/ProjectCover";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 type Tab = "overview" | "making";
@@ -42,24 +41,7 @@ export function ProjectDetail({ project }: { project: Project }) {
       <header className="bg-gradient-to-b from-spotify/25 to-transparent px-6 pb-8 pt-16 sm:px-10">
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-end">
           <div className="w-36 max-w-full shrink-0 sm:w-52">
-            {project.cover ? (
-              <div className="relative aspect-square w-full overflow-hidden rounded-md shadow-2xl ring-1 ring-black/30">
-                <Image
-                  src={project.cover}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 640px) 9rem, 13rem"
-                  className="object-cover"
-                />
-              </div>
-            ) : (
-              <AlbumArtPlaceholder
-                fill
-                glyph="🎵"
-                hue={hueFor(project.slug)}
-                label={project.title}
-              />
-            )}
+            <ProjectCover fill project={project} label={project.title} />
           </div>
 
           <div className="text-center sm:text-left">
