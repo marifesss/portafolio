@@ -101,6 +101,7 @@ export interface Project {
 /* Experience ("Discográfica")                                         */
 /* ------------------------------------------------------------------ */
 
+/** A headline "track" on an experience "album" (e.g. SORT, DOI). */
 export interface ExperienceHighlight {
   name: string;
   description: Localized;
@@ -111,6 +112,13 @@ export interface Experience {
   role: Localized;
   period: Localized;
   description: Localized;
+  /** Coverage of the work, e.g. "all Venezuela regions". */
+  scope?: Localized;
+  /** Audience the output reaches, e.g. "~100 users". */
+  reach?: Localized;
+  /** Data / BI tooling chips (SQL Server DW, ETL, Power BI…). */
+  tools?: string[];
+  /** The album's headline "tracks". */
   highlights: ExperienceHighlight[];
 }
 
