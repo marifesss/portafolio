@@ -75,6 +75,28 @@ export const projects: Project[] = [
     links: [
       // TODO: repos directos (GitHub org DS-PROYECTO-ARROW-MAZE)
     ],
+    making: {
+      narrative: {
+        es: "El backend está organizado en una Clean Architecture de 4 capas —dominio, aplicación, infraestructura y presentación— donde las dependencias siempre apuntan hacia el dominio. El núcleo del juego (reglas, estados de tablero y validación de movimientos) no conoce nada de NestJS, la base de datos ni el transporte HTTP: es lógica pura y testeable de forma aislada.\n\nSobre esa base aplicamos Domain-Driven Design completo: entidades, objetos de valor, agregados y repositorios como interfaces del dominio, implementadas en la capa de infraestructura. El modelo del juego habla el lenguaje del dominio, no el de la base de datos.\n\nComo era un proyecto de Diseño de Software, el objetivo explícito era demostrar los patrones: implementamos los 12 patrones de diseño GoF (Factory, Strategy, Observer, State, Command, entre otros), respetando los principios SOLID en cada capa y usando interceptores de NestJS para programación orientada a aspectos (logging, manejo de errores y transformación de respuestas transversales).\n\nFui responsable del dominio del juego y el motor de lógica: el modelado de las flechas, la resolución de movimientos deslizantes y las condiciones de victoria/derrota. El proyecto obtuvo 20/20 y el profesor lo tomó como ejemplo de referencia para futuros semestres.",
+        en: "The backend is organized as a 4-layer Clean Architecture —domain, application, infrastructure, and presentation— where dependencies always point inward toward the domain. The game core (rules, board states, move validation) knows nothing about NestJS, the database, or HTTP transport: it's pure logic, testable in isolation.\n\nOn top of that we applied full Domain-Driven Design: entities, value objects, aggregates, and repositories as domain interfaces, implemented in the infrastructure layer. The game model speaks the domain's language, not the database's.\n\nBecause this was a Software Design course project, the explicit goal was to demonstrate the patterns: we implemented all 12 GoF design patterns (Factory, Strategy, Observer, State, Command, and more), honoring SOLID principles at every layer and using NestJS interceptors for aspect-oriented programming (cross-cutting logging, error handling, and response transformation).\n\nI was responsible for the game domain and engine: modeling the arrows, resolving sliding moves, and computing win/lose conditions. The project earned a perfect score (20/20), and the professor used it as a reference example for future semesters.",
+      },
+      diagrams: [
+        {
+          // TODO: diagrama real de las 4 capas de Clean Architecture
+          caption: {
+            es: "Clean Architecture — las 4 capas y sus dependencias",
+            en: "Clean Architecture — the 4 layers and their dependencies",
+          },
+        },
+        {
+          // TODO: diagrama del modelo de dominio (DDD)
+          caption: {
+            es: "Modelo de dominio — entidades, agregados y repositorios",
+            en: "Domain model — entities, aggregates, and repositories",
+          },
+        },
+      ],
+    },
     media: [
       {
         type: "video",
