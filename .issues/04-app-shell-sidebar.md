@@ -1,6 +1,6 @@
 # 04 — App shell & sidebar polish (desktop)
 
-**Status:** open
+**Status:** done
 **Type:** style
 **Depends on:** 01, 02
 
@@ -12,16 +12,16 @@ about visual fidelity, active-route states, and the sidebar "library" feel.
 search pill), and §4 ("Your Library" sidebar) — see `imagenesInspo/`.**
 
 ## Tasks
-- [ ] Polish `AppShell` grid: rounded panels, spacing, gradients, and the fixed
+- [x] Polish `AppShell` grid: rounded panels, spacing, gradients, and the fixed
       player row, matching Spotify's three-zone layout on desktop.
-- [ ] Style `Sidebar`: brand/name at top, nav items from
+- [x] Style `Sidebar`: brand/name at top, nav items from
       `src/content/navigation.ts` with icons, active-route highlight, hover
       states.
-- [ ] Add the language toggle placement cleanly into the shell (already
+- [x] Add the language toggle placement cleanly into the shell (already
       top-right of main) without overlapping content.
-- [ ] Ensure the main panel scrolls independently while sidebar + player stay
+- [x] Ensure the main panel scrolls independently while sidebar + player stay
       fixed.
-- [ ] Verify active state uses the current route (Next `usePathname`).
+- [x] Verify active state uses the current route (Next `usePathname`).
 
 ## Acceptance criteria
 - On desktop the layout reads clearly as Spotify: library sidebar, scrollable
