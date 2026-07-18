@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
@@ -17,8 +17,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${site.name} — Portfolio`,
-  description: site.tagline.en,
+  metadataBase: new URL(`https://${site.domain}`),
+  title: {
+    // Home uses the default; other routes fill "%s" with their section name.
+    default: `${site.name} — Portafolio`,
+    template: `%s · ${site.name}`,
+  },
+  description: site.tagline.es,
+  applicationName: `${site.name} — Portafolio`,
+  authors: [{ name: site.name }],
+};
+
+export const viewport: Viewport = {
+  // Tints the mobile browser chrome to match the app's dark base.
+  themeColor: "#121212",
 };
 
 export default function RootLayout({
