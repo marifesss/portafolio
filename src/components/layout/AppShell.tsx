@@ -16,7 +16,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <Sidebar />
         </aside>
 
-        <main className="relative min-h-0 overflow-y-auto rounded-lg bg-gradient-to-b from-neutral-900 to-neutral-950">
+        <main className="surface-panel relative min-h-0 overflow-y-auto rounded-lg">
           <div className="absolute right-4 top-4 z-10">
             <LanguageToggle />
           </div>

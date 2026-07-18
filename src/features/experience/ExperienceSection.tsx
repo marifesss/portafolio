@@ -17,12 +17,12 @@ export function ExperienceSection() {
           <article key={job.company} className="space-y-4">
             <div>
               <h2 className="text-2xl font-bold text-white">{job.company}</h2>
-              <p className="text-zinc-400">
+              <p className="text-muted">
                 {pick(job.role)} · {pick(job.period)}
               </p>
             </div>
 
-            <p className="max-w-2xl leading-relaxed text-zinc-300">
+            <p className="max-w-2xl leading-relaxed text-muted">
               {pick(job.description)}
             </p>
 
@@ -33,7 +33,7 @@ export function ExperienceSection() {
                   className="rounded-lg bg-white/5 p-5 transition-colors hover:bg-white/10"
                 >
                   <h3 className="font-bold text-spotify">{highlight.name}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-zinc-300">
+                  <p className="mt-2 text-sm leading-relaxed text-muted">
                     {pick(highlight.description)}
                   </p>
                 </li>

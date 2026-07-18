@@ -24,7 +24,7 @@ export function ContactSection() {
                 {channel.icon}
               </span>
               <span className="font-semibold text-white">{channel.label}</span>
-              <span className="ml-auto text-zinc-500">→</span>
+              <span className="ml-auto text-faint">→</span>
             </a>
           </li>
         ))}

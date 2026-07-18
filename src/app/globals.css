@@ -1,20 +1,65 @@
 @import "tailwindcss";
 
 /**
- * Spotify-inspired theme tokens. Registered with Tailwind v4 via `@theme`,
- * so utilities like `bg-spotify`, `text-spotify`, `bg-base`, etc. are
- * available throughout the app.
+ * Spotify-inspired design system.
+ *
+ * All colour, surface and gradient decisions live here. Tokens are registered
+ * with Tailwind v4 via `@theme`, so they surface as utilities (`bg-base`,
+ * `text-muted`, `text-spotify`, …) everywhere. Rule of thumb for the rest of
+ * the app: compose these tokens by name — never re-introduce raw hex or default
+ * Tailwind palette colours (`neutral-900`, `zinc-…`) in feature code.
+ *
+ * Palette source: DESIGN.md §2, matched to the screenshots in `imagenesInspo/`.
  */
 @theme {
-  --color-spotify: #1db954;
-  --color-spotify-bright: #1ed760;
-  --color-base: #121212;
-  --color-elevated: #181818;
-  --color-highlight: #282828;
+  /* Greens — reserved for the play affordance + active/pinned states.
+     Don't use these as generic fills. */
+  --color-spotify: #1db954; /* primary accent */
+  --color-spotify-bright: #1ed760; /* play button, hover accent */
+
+  /* Background scale — dark surfaces, lightest = most "elevated". */
+  --color-base: #121212; /* panel background */
+  --color-elevated: #181818; /* cards */
+  --color-highlight: #282828; /* card / row hover */
+
+  /* Text scale on dark surfaces. Primary text is plain white (`text-white`). */
+  --color-muted: #a7a7a7; /* subtitles, meta */
+  --color-faint: #6a6a6a; /* row index, timestamps */
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+
+/* ---------------------------------------------------------------------------
+ * Surface & gradient helpers
+ *
+ * Reusable backgrounds so sections compose a look instead of re-deriving it.
+ * ------------------------------------------------------------------------- */
+
+/* Main scrollable panel: a subtle top fade that settles into `base`. */
+@utility surface-panel {
+  background-color: var(--color-base);
+  background-image: linear-gradient(
+    to bottom,
+    #1f1f1f 0,
+    var(--color-base) 300px
+  );
+}
+
+/* Section / detail headers: a colored tint at the top (~340px) that fades into
+   `base`. Each section sets its own hue via `--header-accent` (inline style or
+   a utility); falls back to a neutral elevated tint. */
+@utility header-fade {
+  background-image: linear-gradient(
+    to bottom,
+    var(--header-accent, var(--color-highlight)) 0,
+    var(--color-base) 340px
+  );
+}
+
+/* ---------------------------------------------------------------------------
+ * Base document styles
+ * ------------------------------------------------------------------------- */
 
 html {
   color-scheme: dark;
@@ -25,8 +70,64 @@ body {
   color: #ffffff;
 }
 
-/* Spotify-style thin scrollbar in the main panel. */
+/* Spotify-style thin scrollbar. Firefox uses the standard properties; WebKit /
+   Blink get an explicit thumb tuned for contrast on dark surfaces. */
 * {
   scrollbar-width: thin;
   scrollbar-color: #4d4d4d transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #4d4d4d;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #6a6a6a;
+}
+
+/* ---------------------------------------------------------------------------
+ * Keyframes
+ * ------------------------------------------------------------------------- */
+
+/* Animated equalizer bars — PlayerBar + "playing track" affordances.
+   Per-bar timing (duration / delay) is set inline so each bar drifts. The
+   reduced-motion baseline below freezes this at its first frame. */
+@keyframes equalize {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Motion baseline
+ *
+ * Rich-but-restrained motion is opt-in throughout the UI; this neutralizes it
+ * globally for users who ask for reduced motion. Feature components should
+ * still gate large animations, but this guarantees a calm floor.
+ * ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
