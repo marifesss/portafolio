@@ -50,4 +50,6 @@ export const records: PersonalRecord[] = [
       en: "Volunteer at ProgramAcademy, teaching basic programming to underprivileged children outside Venezuela (online)",
     },
   },
+  // TODO: add LinkedIn certifications as real tracks once confirmed. Until then
+  // RecordsSection renders a non-blocking "coming soon" placeholder track.
 ];
