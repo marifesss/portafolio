@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+/**
+ * Spotify-inspired theme tokens. Registered with Tailwind v4 via `@theme`,
+ * so utilities like `bg-spotify`, `text-spotify`, `bg-base`, etc. are
+ * available throughout the app.
+ */
+@theme {
+  --color-spotify: #1db954;
+  --color-spotify-bright: #1ed760;
+  --color-base: #121212;
+  --color-elevated: #181818;
+  --color-highlight: #282828;
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-base);
+  color: #ffffff;
+}
+
+/* Spotify-style thin scrollbar in the main panel. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #4d4d4d transparent;
+}
