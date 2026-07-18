@@ -20,6 +20,14 @@ export function MobileTabBar() {
   const { pick, t } = useLanguage();
   const [moreOpen, setMoreOpen] = useState(false);
 
+  // Close the overflow menu on navigation. Done during render (React's
+  // "adjust state on prop change" pattern) rather than in an effect.
+  const [lastPath, setLastPath] = useState(pathname);
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
+    setMoreOpen(false);
+  }
+
   // Home matches only the exact root; every other section matches its subtree.
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -28,8 +36,7 @@ export function MobileTabBar() {
   const overflow = navigation.slice(PRIMARY_TABS);
   const overflowActive = overflow.some((item) => isActive(item.href));
 
-  // Close the overflow menu on navigation and on Escape.
-  useEffect(() => setMoreOpen(false), [pathname]);
+  // Close the overflow menu on Escape.
   useEffect(() => {
     if (!moreOpen) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMoreOpen(false);
@@ -38,7 +45,7 @@ export function MobileTabBar() {
   }, [moreOpen]);
 
   const tabClass = (active: boolean) =>
-    `flex flex-1 flex-col items-center gap-1 px-1 py-2 text-[10px] font-medium leading-tight transition-colors ${
+    `flex flex-1 flex-col items-center gap-1 rounded-md px-1 py-2 text-[10px] font-medium leading-tight outline-none transition-colors focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-spotify ${
       active ? "text-white" : "text-faint"
     }`;
 
@@ -65,7 +72,7 @@ export function MobileTabBar() {
                     <Link
                       href={item.href}
                       aria-current={active ? "page" : undefined}
-                      className={`flex items-center gap-3 px-4 py-3 text-sm font-semibold transition-colors ${
+                      className={`flex items-center gap-3 px-4 py-3 text-sm font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-spotify ${
                         active ? "bg-white/10 text-white" : "text-muted"
                       }`}
                     >

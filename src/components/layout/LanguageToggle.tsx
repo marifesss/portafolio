@@ -11,7 +11,7 @@ export function LanguageToggle({ className = "" }: { className?: string }) {
       type="button"
       onClick={toggleLocale}
       aria-label={t.switchLanguage}
-      className={`inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/50 px-3 py-1.5 text-xs font-bold text-white backdrop-blur transition-colors hover:border-white/40 ${className}`}
+      className={`inline-flex items-center gap-1 rounded-full border border-white/15 bg-black/50 px-3 py-1.5 text-xs font-bold text-white outline-none backdrop-blur transition-colors hover:border-white/40 focus-visible:ring-2 focus-visible:ring-spotify ${className}`}
     >
       <span className={locale === "es" ? "text-spotify" : "text-faint"}>
         ES

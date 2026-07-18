@@ -44,7 +44,7 @@ function PlayToggle({
       type="button"
       onClick={onToggle}
       aria-label={label}
-      className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white text-sm text-black transition-transform hover:scale-105"
+      className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white text-sm text-black outline-none transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-spotify focus-visible:ring-offset-2 focus-visible:ring-offset-base"
     >
       <span aria-hidden>{isPlaying ? "⏸" : "▶"}</span>
     </button>
