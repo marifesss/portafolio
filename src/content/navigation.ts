@@ -12,6 +12,12 @@ export const navigation: NavItem[] = [
     label: { es: "Inicio", en: "Home" },
   },
   {
+    id: "search",
+    href: "/buscar",
+    icon: "🔍",
+    label: { es: "Buscar", en: "Search" },
+  },
+  {
     id: "profile",
     href: "/perfil",
     icon: "👤",
