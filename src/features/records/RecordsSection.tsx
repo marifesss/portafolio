@@ -19,8 +19,8 @@ export function RecordsSection() {
   return (
     <section>
       <SectionHeader
-        eyebrow="B-sides"
-        title="Récords personales"
+        eyebrow={t.recordsEyebrow}
+        title={t.recordsTitle}
         subtitle={`${t.offTheCode} · ${records.length} ${t.tracks}`}
       />
 

@@ -15,7 +15,10 @@ export function ExperienceSection() {
 
   return (
     <section>
-      <SectionHeader eyebrow="Discográfica" title="Experiencia" />
+      <SectionHeader
+        eyebrow={t.experienceEyebrow}
+        title={t.experienceTitle}
+      />
 
       <div className="space-y-12 px-6 pb-12 sm:px-10">
         {experience.map((job) => (

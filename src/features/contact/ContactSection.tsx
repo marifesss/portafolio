@@ -9,12 +9,12 @@ import { useLanguage } from "@/i18n/LanguageProvider";
 
 /** "¿Conectamos?" — contact channels as tappable cards. */
 export function ContactSection() {
-  const { pick } = useLanguage();
+  const { pick, t } = useLanguage();
   const m = useSectionMotion();
 
   return (
     <section>
-      <SectionHeader eyebrow="Contacto" title={pick(contactHeading)} />
+      <SectionHeader eyebrow={t.contactEyebrow} title={pick(contactHeading)} />
 
       <div className="px-6 pb-12 sm:max-w-lg sm:px-10">
         {/* Reinforce the "open to work" signal right at the point of contact. */}

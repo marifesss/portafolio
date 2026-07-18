@@ -18,7 +18,7 @@ export function SkillsSection() {
     <section>
       <SectionHeader
         eyebrow={t.playlist}
-        title="Skills"
+        title={t.skillsTitle}
         subtitle={`${total} ${t.tracks}`}
       />
 
