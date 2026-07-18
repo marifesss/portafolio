@@ -30,6 +30,9 @@ export const projects: Project[] = [
     ],
   },
   {
+    // Pre-launch: the detail view renders the spoiler-free coming-soon layout
+    // (teaser + stack + notify bell), so `description` below is NOT shown yet.
+    // TODO: reveal the real product concept / description + cover at launch.
     slug: "partela",
     title: "Partela",
     comingSoon: true,
@@ -41,9 +44,12 @@ export const projects: Project[] = [
       es: "🔔 Próximo lanzamiento — Pre-guarda este álbum",
       en: "🔔 Coming soon — Pre-save this album",
     },
+    // Non-spoiler on purpose: the coming-soon view uses the generic teaser, and
+    // no product concept ships to the client (this string is bundled/serialized).
+    // TODO: swap in the real description with the product concept at launch.
     description: {
-      es: "Un nuevo proyecto fintech, actualmente en desarrollo. Como co-fundadora y desarrolladora frontend, trabajo con React 19, TypeScript, Vite y Tailwind, conectando con un backend en Spring Boot y Spring Cloud sobre PostgreSQL.\n\nMás detalles muy pronto — dale a la campana 🔔 para enterarte cuando lance.",
-      en: "A new fintech project, currently in development. As co-founder and frontend developer, I work with React 19, TypeScript, Vite, and Tailwind, connecting to a Spring Boot and Spring Cloud backend running on PostgreSQL.\n\nMore details coming soon — hit the bell 🔔 to know when it drops.",
+      es: "Un nuevo proyecto en desarrollo. Los detalles se revelan en el lanzamiento — dale a la campana 🔔 para enterarte cuando lance.",
+      en: "A new project in the works. The details drop at launch — hit the bell 🔔 to know when it releases.",
     },
     stack: [
       "React 19",
