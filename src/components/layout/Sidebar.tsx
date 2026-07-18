@@ -27,7 +27,7 @@ export function Sidebar() {
       {/* Brand / identity — doubles as the library header and links home. */}
       <Link
         href="/"
-        className="flex items-center gap-3 px-3 py-4 text-lg font-black tracking-tight text-white"
+        className="flex items-center gap-3 rounded-md px-3 py-4 text-lg font-black tracking-tight text-white outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-spotify"
       >
         <span aria-hidden className="text-2xl">
           🎧
@@ -47,7 +47,7 @@ export function Sidebar() {
               <Link
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`group flex items-center gap-3 rounded-md p-2 font-semibold transition-colors ${
+                className={`group flex items-center gap-3 rounded-md p-2 font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-spotify ${
                   active
                     ? "bg-highlight text-white"
                     : "text-muted hover:bg-white/5 hover:text-white"

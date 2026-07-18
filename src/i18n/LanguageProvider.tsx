@@ -5,13 +5,42 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 import { DEFAULT_LOCALE, type Locale, type Localized } from "@/lib/types";
 import { dictionary, type UIDictionary } from "./dictionary";
 
 const STORAGE_KEY = "portfolio-locale";
+
+/* localStorage-backed locale store. Reading it through `useSyncExternalStore`
+ * keeps SSR/hydration stable (server + first client render use the default,
+ * then the client swaps to the saved value) without a post-mount `setState`,
+ * and syncs the choice across tabs for free via the `storage` event. */
+const localeListeners = new Set<() => void>();
+
+const isLocale = (value: string | null): value is Locale =>
+  value === "es" || value === "en";
+
+function getStoredLocale(): Locale {
+  const saved = window.localStorage.getItem(STORAGE_KEY);
+  return isLocale(saved) ? saved : DEFAULT_LOCALE;
+}
+
+function setStoredLocale(locale: Locale) {
+  window.localStorage.setItem(STORAGE_KEY, locale);
+  // The native `storage` event only fires in other tabs, so notify this one.
+  localeListeners.forEach((listener) => listener());
+}
+
+function subscribeLocale(onChange: () => void) {
+  localeListeners.add(onChange);
+  window.addEventListener("storage", onChange);
+  return () => {
+    localeListeners.delete(onChange);
+    window.removeEventListener("storage", onChange);
+  };
+}
 
 interface LanguageContextValue {
   locale: Locale;
@@ -26,24 +55,24 @@ interface LanguageContextValue {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocale] = useState<Locale>(DEFAULT_LOCALE);
+  // SSR + first client render use DEFAULT_LOCALE (no hydration mismatch), then
+  // the client swaps to the persisted value — with no post-mount setState.
+  const locale = useSyncExternalStore(
+    subscribeLocale,
+    getStoredLocale,
+    () => DEFAULT_LOCALE,
+  );
 
-  // Restore the saved preference after mount (avoids hydration mismatch).
+  // Keep <html lang> in sync — a DOM side-effect, not React state.
   useEffect(() => {
-    const saved = window.localStorage.getItem(STORAGE_KEY);
-    if (saved === "es" || saved === "en") setLocale(saved);
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, locale);
     document.documentElement.lang = locale;
   }, [locale]);
 
   const value = useMemo<LanguageContextValue>(
     () => ({
       locale,
-      setLocale,
-      toggleLocale: () => setLocale((prev) => (prev === "es" ? "en" : "es")),
+      setLocale: setStoredLocale,
+      toggleLocale: () => setStoredLocale(locale === "es" ? "en" : "es"),
       t: dictionary[locale],
       pick: (localized) => localized[locale],
     }),
