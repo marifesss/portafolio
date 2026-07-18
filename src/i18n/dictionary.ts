@@ -32,7 +32,13 @@ export const dictionary = {
     profileEyebrow: "Perfil",
     profileMeta: "Ingeniería Informática · UCAB",
     comingSoon: "Próximamente",
+    unreleased: "Sin lanzar",
+    comingSoonTeaser:
+      "Un nuevo proyecto está en el estudio. Los detalles se revelan en el lanzamiento — activa la campana para ser de los primeros en escucharlo.",
     notifyMe: "🔔 Notificarme cuando lance",
+    notifySubject: "Avísame cuando lance",
+    notifyBody:
+      "¡Hola Mariana! Me encantaría que me avises cuando lance",
     seeProject: "Ver proyecto",
     featuredProjects: "Proyectos destacados",
     notFoundTitle: "Pista no encontrada",
@@ -65,7 +71,12 @@ export const dictionary = {
     profileEyebrow: "Profile",
     profileMeta: "Computer Engineering · UCAB",
     comingSoon: "Coming soon",
+    unreleased: "Unreleased",
+    comingSoonTeaser:
+      "A new project is in the studio. The details drop at launch — hit the bell to be among the first to hear it.",
     notifyMe: "🔔 Notify me when it drops",
+    notifySubject: "Notify me when it launches",
+    notifyBody: "Hi Mariana! I'd love you to let me know when you launch",
     seeProject: "See project",
     featuredProjects: "Featured projects",
     notFoundTitle: "Track not found",

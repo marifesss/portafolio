@@ -5,11 +5,11 @@ import Image from "next/image";
 import { useState } from "react";
 import type { Project } from "@/lib/types";
 import { Chip } from "@/components/ui/Chip";
-import { Badge } from "@/components/ui/Badge";
 import { AlbumArtPlaceholder } from "@/components/ui/AlbumArtPlaceholder";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
 import { DiagramPlaceholder } from "@/components/ui/DiagramPlaceholder";
 import { ProjectGallery } from "@/features/projects/ProjectGallery";
+import { ComingSoonDetail } from "@/features/projects/ComingSoonDetail";
 import { hueFor } from "@/features/projects/covers";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
@@ -28,6 +28,9 @@ function paragraphs(text: string) {
 export function ProjectDetail({ project }: { project: Project }) {
   const { pick, t } = useLanguage();
   const [tab, setTab] = useState<Tab>("overview");
+
+  // Unreleased projects get a dedicated, spoiler-free pre-launch layout.
+  if (project.comingSoon) return <ComingSoonDetail project={project} />;
 
   const hasMaking = Boolean(project.making);
   // Guard against a stale tab if a project without a "making" tab is shown.
@@ -52,7 +55,7 @@ export function ProjectDetail({ project }: { project: Project }) {
             ) : (
               <AlbumArtPlaceholder
                 fill
-                glyph={project.comingSoon ? "🔒" : "🎵"}
+                glyph="🎵"
                 hue={hueFor(project.slug)}
                 label={project.title}
               />
@@ -66,13 +69,8 @@ export function ProjectDetail({ project }: { project: Project }) {
             <h1 className="mt-2 text-4xl font-black tracking-tight text-white sm:text-6xl">
               {project.title}
             </h1>
-            <p className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
-              <span className="text-lg font-semibold text-white">
-                {pick(project.role)}
-              </span>
-              {project.comingSoon && (
-                <Badge tone="accent">{t.comingSoon}</Badge>
-              )}
+            <p className="mt-4 text-lg font-semibold text-white">
+              {pick(project.role)}
             </p>
           </div>
         </div>
@@ -146,53 +144,41 @@ export function ProjectDetail({ project }: { project: Project }) {
               </div>
             )}
 
-            {/* Gallery: real media if present; a designed placeholder otherwise
-                (skipped for "coming soon" projects, which have no shots yet). */}
+            {/* Gallery: real media if present; a designed placeholder otherwise. */}
             {project.media && project.media.length > 0 ? (
               <ProjectGallery media={project.media} title={project.title} />
             ) : (
-              !project.comingSoon && (
-                <div>
-                  <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-muted">
-                    {t.gallery}
-                  </h2>
-                  <ImagePlaceholder
-                    label={t.screenshotsComingSoon}
-                    className="max-w-2xl"
-                  />
-                </div>
-              )
+              <div>
+                <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-muted">
+                  {t.gallery}
+                </h2>
+                <ImagePlaceholder
+                  label={t.screenshotsComingSoon}
+                  className="max-w-2xl"
+                />
+              </div>
             )}
 
-            {project.comingSoon ? (
-              <a
-                href="mailto:marianafes15@gmail.com?subject=Partela%20launch"
-                className="inline-flex items-center gap-2 rounded-full bg-spotify px-6 py-3 font-bold text-black transition-transform hover:scale-105"
-              >
-                {t.notifyMe}
-              </a>
-            ) : (
-              project.links.length > 0 && (
-                <div>
-                  <h2 className="mb-3 text-sm font-bold uppercase tracking-widest text-muted">
-                    {t.links}
-                  </h2>
-                  <ul className="flex flex-wrap gap-3">
-                    {project.links.map((link) => (
-                      <li key={link.href}>
-                        <a
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="rounded-full border border-white/15 px-4 py-2 text-sm text-white transition-colors hover:border-spotify hover:text-spotify"
-                        >
-                          {pick(link.label)} ↗
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )
+            {project.links.length > 0 && (
+              <div>
+                <h2 className="mb-3 text-sm font-bold uppercase tracking-widest text-muted">
+                  {t.links}
+                </h2>
+                <ul className="flex flex-wrap gap-3">
+                  {project.links.map((link) => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-full border border-white/15 px-4 py-2 text-sm text-white transition-colors hover:border-spotify hover:text-spotify"
+                      >
+                        {pick(link.label)} ↗
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
           </div>
         ) : (
