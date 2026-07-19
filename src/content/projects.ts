@@ -8,6 +8,7 @@ export const projects: Project[] = [
   {
     slug: "yelou",
     title: "Yelou",
+    cover: "/images/yelou/portada.jpeg",
     role: {
       es: "Co-founder & Backend Developer",
       en: "Co-founder & Backend Developer",
@@ -36,6 +37,7 @@ export const projects: Project[] = [
     slug: "partela",
     title: "Partela",
     comingSoon: true,
+    cover: "/images/partela/portadaAlbum.jpeg",
     role: {
       es: "Co-founder & Frontend Developer",
       en: "Co-founder & Frontend Developer",
