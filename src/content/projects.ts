@@ -146,44 +146,13 @@ export const projects: Project[] = [
     media: [
       {
         type: "video",
-        src: "/images/arrowmaze/video3d.mp4",
-        poster: "/images/arrowmaze/tablero3d.png",
-        caption: { es: "Gameplay en 3D", en: "3D gameplay" },
+        src: "/images/arrowmaze/videocompleto-parte1.webm",
+        caption: { es: "Gameplay — parte 1", en: "Gameplay — part 1" },
       },
       {
-        type: "image",
-        src: "/images/arrowmaze/splashscreen.png",
-        caption: { es: "Pantalla de bienvenida", en: "Splash screen" },
-      },
-      {
-        type: "image",
-        src: "/images/arrowmaze/login.png",
-        caption: { es: "Inicio de sesión", en: "Login" },
-      },
-      {
-        type: "image",
-        src: "/images/arrowmaze/tablero1.png",
-        caption: { es: "Tablero de juego", en: "Game board" },
-      },
-      {
-        type: "image",
-        src: "/images/arrowmaze/tablero3d.png",
-        caption: { es: "Vista 3D del tablero", en: "3D board view" },
-      },
-      {
-        type: "image",
-        src: "/images/arrowmaze/exito.png",
-        caption: { es: "Nivel superado", en: "Level cleared" },
-      },
-      {
-        type: "image",
-        src: "/images/arrowmaze/Failed.png",
-        caption: { es: "Nivel fallido", en: "Level failed" },
-      },
-      {
-        type: "image",
-        src: "/images/arrowmaze/leaderboard.png",
-        caption: { es: "Tabla de clasificación", en: "Leaderboard" },
+        type: "video",
+        src: "/images/arrowmaze/videocompleto-parte2.webm",
+        caption: { es: "Gameplay — parte 2", en: "Gameplay — part 2" },
       },
     ],
   },
