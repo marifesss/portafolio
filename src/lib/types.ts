@@ -50,6 +50,12 @@ export interface MediaItem {
   caption: Localized;
   /** Poster frame for videos. */
   poster?: string;
+  /**
+   * Which build a capture belongs to. When any item sets this, the gallery
+   * groups media by platform ("Web" / "Mobile app") to highlight that both
+   * were built, and frames web captures landscape and mobile ones as phones.
+   */
+  platform?: "web" | "mobile";
 }
 
 /** An architecture diagram in the "Cómo se hizo" tab. */
