@@ -19,14 +19,14 @@ export const navigation: NavItem[] = [
     href: "/perfil",
     icon: "👤",
     label: { es: "Perfil", en: "About" },
-    cover: "/images/todo/cover6.jpeg",
+    cover: "/images/todo/cover2.jpeg",
   },
   {
     id: "projects",
     href: "/proyectos",
     icon: "🎵",
     label: { es: "Proyectos", en: "Projects" },
-    cover: "/images/todo/cover2.jpeg",
+    cover: "/images/todo/cover6.jpeg",
   },
   {
     id: "experience",
@@ -54,6 +54,6 @@ export const navigation: NavItem[] = [
     href: "/contacto",
     icon: "📮",
     label: { es: "Contacto", en: "Contact" },
-    cover: "/images/todo/cover6.jpeg",
+    cover: "/images/todo/cover7.jpeg",
   },
 ];
