@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { LanguageToggle } from "./LanguageToggle";
 import { MobileTabBar } from "./MobileTabBar";
 import { PlayerBar } from "./PlayerBar";
+import { ScrollArea } from "./ScrollArea";
 import { Sidebar } from "./Sidebar";
 
 /**
@@ -25,7 +26,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <Sidebar />
         </aside>
 
-        <main className="surface-panel min-h-0 scroll-smooth overflow-y-auto rounded-lg">
+        <ScrollArea className="surface-panel min-h-0 scroll-smooth overflow-y-auto rounded-lg">
           {/* Sticky top-right toggle: stays pinned while the panel scrolls, but
               takes no layout space (the negative margin cancels its height) so
               it overlays each section's own top padding instead of overlapping
@@ -34,7 +35,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <LanguageToggle className="pointer-events-auto" />
           </div>
           {children}
-        </main>
+        </ScrollArea>
       </div>
 
       <PlayerBar />

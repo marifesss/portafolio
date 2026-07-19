@@ -1,9 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useSyncExternalStore } from "react";
+import { useRef, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { site } from "@/content/site";
 import { greetings, featuredSlugs, home, type Daypart } from "@/content/home";
 import { getProjectBySlug, projects } from "@/content/projects";
@@ -15,6 +21,7 @@ import {
   SectionTransition,
   useSectionMotion,
 } from "@/components/motion/SectionTransition";
+import { useScrollAreaRef } from "@/components/layout/ScrollArea";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 /** Bucket a local hour (0–23) into a Spotify-style daypart. */
@@ -67,6 +74,26 @@ export function HomeSection() {
   const router = useRouter();
   const daypart = useDaypart();
   const [query, setQuery] = useState("");
+  const reduce = useReducedMotion();
+
+  // Scroll-linked parallax for the "browse all" tiles. The site scrolls inside
+  // the shell's content panel, so we track that container (not the window).
+  // As the grid travels from the panel's bottom to its top, its offset maps
+  // from +down to −up: scrolling down lifts the tiles, scrolling up lowers them.
+  const scrollAreaRef = useScrollAreaRef();
+  const browseRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    container: scrollAreaRef ?? undefined,
+    target: browseRef,
+    offset: ["start end", "end start"],
+  });
+  const rawBrowseY = useTransform(scrollYProgress, [0, 1], [70, -70]);
+  // Spring-smooth the raw offset so the drift feels fluid, not pinned 1:1.
+  const browseY = useSpring(rawBrowseY, {
+    stiffness: 120,
+    damping: 30,
+    mass: 0.35,
+  });
 
   const q = normalize(query);
 
@@ -321,35 +348,47 @@ export function HomeSection() {
           <h2 className="mb-4 mt-12 text-2xl font-bold tracking-tight">
             {t.searchBrowseAll}
           </h2>
+          {/* Outer wrapper is the scroll-measured target (never transformed, so
+              the parallax below can't feed back into its own measurement); the
+              inner list carries the drifting `y`. */}
+          <div ref={browseRef}>
           <motion.ul
             className="grid grid-cols-2 gap-3 sm:grid-cols-3"
-            variants={m.staggerContainer}
+            style={reduce ? undefined : { y: browseY }}
+            variants={m.revealTileContainer}
             initial="hidden"
-            animate="visible"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
           >
             {browseItems.map((item, i) => {
               const hue = BROWSE_HUES[i % BROWSE_HUES.length];
               return (
-                <motion.li key={item.id} variants={m.staggerItem}>
+                <motion.li key={item.id} variants={m.revealTile}>
                   <Link
                     href={item.href}
-                    className="relative flex h-24 overflow-hidden rounded-lg p-4 outline-none ring-white/10 transition-transform hover:scale-[1.02] focus-visible:ring-2"
+                    className="group/tile relative flex h-24 overflow-hidden rounded-lg p-4 outline-none ring-white/10 transition-transform hover:scale-[1.02] focus-visible:ring-2"
                     style={{
                       backgroundImage: `linear-gradient(135deg, hsl(${hue} 45% 32%), hsl(${(hue + 40) % 360} 55% 18%))`,
                     }}
                   >
                     <span className="font-bold text-white">{pick(item.label)}</span>
+                    {/* Decorative tile in the same hue — a rotated "album" corner
+                        with depth (drop + inner highlight) replacing the emoji. */}
                     <span
                       aria-hidden
-                      className="absolute -bottom-2 -right-1 rotate-12 text-4xl drop-shadow-lg"
-                    >
-                      {item.icon}
-                    </span>
+                      className="absolute -bottom-3 -right-3 h-16 w-16 rotate-[25deg] rounded-xl transition-transform duration-300 group-hover/tile:rotate-[18deg] group-hover/tile:scale-105"
+                      style={{
+                        backgroundColor: `hsl(${hue} 58% 46%)`,
+                        boxShadow:
+                          "0 10px 22px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.18)",
+                      }}
+                    />
                   </Link>
                 </motion.li>
               );
             })}
           </motion.ul>
+          </div>
         </>
       )}
     </SectionTransition>
