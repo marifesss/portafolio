@@ -29,6 +29,43 @@ export const projects: Project[] = [
       },
       // TODO: repo de GitHub, Figma, demo/deploy
     ],
+    media: [
+      // Web build (landscape captures).
+      {
+        type: "video",
+        src: "/images/yelou/videoinicialweb.mp4",
+        platform: "web",
+        caption: { es: "Página de inicio", en: "Landing page" },
+      },
+      {
+        type: "video",
+        src: "/images/yelou/categoriasdeservicio.mp4",
+        platform: "web",
+        caption: { es: "Categorías de servicio", en: "Service categories" },
+      },
+      {
+        type: "video",
+        src: "/images/yelou/videotrabajadorcotizacion.mp4",
+        platform: "web",
+        caption: {
+          es: "Cotización con un trabajador",
+          en: "Requesting a worker's quote",
+        },
+      },
+      // Mobile build (portrait captures).
+      {
+        type: "video",
+        src: "/images/yelou/iniciotelefono.mp4",
+        platform: "mobile",
+        caption: { es: "Inicio", en: "Home" },
+      },
+      {
+        type: "video",
+        src: "/images/yelou/mapatelefono.mp4",
+        platform: "mobile",
+        caption: { es: "Mapa de servicios", en: "Services map" },
+      },
+    ],
   },
   {
     // Pre-launch: the detail view renders the spoiler-free coming-soon layout
