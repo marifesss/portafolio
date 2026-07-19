@@ -1,17 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { site } from "@/content/site";
 import { profile } from "@/content/profile";
-import { AlbumArtPlaceholder } from "@/components/ui/AlbumArtPlaceholder";
 import {
   SectionTransition,
   useSectionMotion,
 } from "@/components/motion/SectionTransition";
 import { useLanguage } from "@/i18n/LanguageProvider";
-
-/** Distinct accent hue per "género" circle (green · violet · blue · amber · teal). */
-const GENRE_HUES = [145, 275, 210, 30, 175];
 
 /**
  * The "Perfil" (About) view, modeled on the Spotify Profile page: a circular
@@ -26,12 +23,13 @@ export function ProfileSection() {
     <article>
       {/* Artist header: circle avatar · eyebrow · huge name · meta line. */}
       <header className="flex flex-col items-center gap-6 bg-gradient-to-b from-spotify/25 to-transparent px-6 pb-8 pt-16 text-center sm:flex-row sm:items-end sm:gap-8 sm:px-10 sm:text-left">
-        <AlbumArtPlaceholder
-          shape="circle"
-          size={176}
-          hue={145}
-          glyph="🎧"
-          label={site.name}
+        <Image
+          src="/images/mariana/perfil.jpeg"
+          alt={site.name}
+          width={208}
+          height={208}
+          priority
+          className="h-44 w-44 shrink-0 rounded-full object-cover shadow-2xl ring-1 ring-black/20 sm:h-52 sm:w-52"
         />
         <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted">
@@ -80,20 +78,26 @@ export function ProfileSection() {
             initial="hidden"
             animate="visible"
           >
-            {profile.genres.map((genre, i) => (
+            {profile.genres.map((genre) => (
               <motion.li
                 key={genre.name}
                 variants={m.staggerItem}
                 className="flex flex-col items-center text-center"
               >
                 <div className="w-full max-w-[9rem]">
-                  <AlbumArtPlaceholder
-                    fill
-                    shape="circle"
-                    hue={GENRE_HUES[i % GENRE_HUES.length]}
-                    glyph={genre.glyph}
-                    label={genre.name}
-                  />
+                  <div
+                    role="img"
+                    aria-label={genre.name}
+                    className="relative aspect-square w-full overflow-hidden rounded-full shadow-lg ring-1 ring-black/20"
+                  >
+                    <Image
+                      src={genre.image}
+                      alt=""
+                      fill
+                      sizes="(max-width: 640px) 45vw, 9rem"
+                      className="object-cover"
+                    />
+                  </div>
                 </div>
                 <p className="mt-3 font-semibold text-white">{genre.name}</p>
                 <p className="text-sm text-muted">{t.genre}</p>

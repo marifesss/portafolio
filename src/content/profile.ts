@@ -19,13 +19,20 @@ export const profile = {
 
   /**
    * "Géneros" — the focus areas rendered as circular "top" items, Spotify's
-   * top-artists treatment. The glyph is decorative; the name is the content.
+   * top-artists treatment. `image` is the cover; `glyph` is a decorative
+   * fallback; the name is the content.
    */
   genres: [
-    { name: "Clean Architecture", glyph: "🏛️" },
-    { name: "DDD", glyph: "🧩" },
-    { name: "Business Intelligence", glyph: "📊" },
-    { name: "Fintech", glyph: "💳" },
-    { name: "Fullstack Development", glyph: "🧑‍💻" },
+    {
+      name: "Business Intelligence",
+      glyph: "📊",
+      image: "/images/todo/genero1.jpeg",
+    },
+    {
+      name: "Fullstack Development",
+      glyph: "🧑‍💻",
+      image: "/images/todo/genero2.jpeg",
+    },
+    { name: "Fintech", glyph: "💳", image: "/images/todo/genero3.jpeg" },
   ],
 } as const;
