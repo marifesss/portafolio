@@ -141,8 +141,8 @@ export function ProjectGallery({
     );
   }
 
-  // ── Legacy layout (no platform tags): featured clip + portrait grid ──────
-  const video = media.find((item) => item.type === "video");
+  // ── Legacy layout (no platform tags): featured clips + portrait grid ─────
+  const videos = media.filter((item) => item.type === "video");
   const images = media.filter((item) => item.type === "image");
 
   return (
@@ -151,22 +151,28 @@ export function ProjectGallery({
         {t.gallery}
       </h2>
 
-      {video && (
-        <figure className="mb-8 max-w-[16rem]">
-          <video
-            src={video.src}
-            poster={video.poster}
-            controls
-            loop
-            muted
-            playsInline
-            aria-label={`${title} — ${pick(video.caption)}`}
-            className="aspect-[540/1024] w-full rounded-2xl bg-black object-cover shadow-lg ring-1 ring-white/10"
-          />
-          <figcaption className="mt-2 text-center text-xs text-faint">
-            {pick(video.caption)}
-          </figcaption>
-        </figure>
+      {videos.length > 0 && (
+        <ul className="mb-8 flex flex-wrap gap-4">
+          {videos.map((video) => (
+            <li key={video.src} className="w-[17rem] max-w-full">
+              <figure>
+                <video
+                  src={video.src}
+                  poster={video.poster}
+                  controls
+                  loop
+                  muted
+                  playsInline
+                  aria-label={`${title} — ${pick(video.caption)}`}
+                  className="aspect-[1280/2856] w-full rounded-2xl bg-black object-cover shadow-lg ring-1 ring-white/10"
+                />
+                <figcaption className="mt-2 text-center text-xs text-faint">
+                  {pick(video.caption)}
+                </figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
       )}
 
       {images.length > 0 && (
