@@ -5,6 +5,10 @@ import { motion, useReducedMotion } from "framer-motion";
 import {
   fadeSlideIn,
   fadeSlideInReduced,
+  revealTile,
+  revealTileContainer,
+  revealTileContainerReduced,
+  revealTileReduced,
   staggerContainer,
   staggerContainerReduced,
   staggerItem,
@@ -32,8 +36,16 @@ export function useSectionMotion() {
         fadeSlideIn: fadeSlideInReduced,
         staggerContainer: staggerContainerReduced,
         staggerItem: staggerItemReduced,
+        revealTileContainer: revealTileContainerReduced,
+        revealTile: revealTileReduced,
       }
-    : { fadeSlideIn, staggerContainer, staggerItem };
+    : {
+        fadeSlideIn,
+        staggerContainer,
+        staggerItem,
+        revealTileContainer,
+        revealTile,
+      };
 }
 
 interface SectionTransitionProps {

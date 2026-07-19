@@ -59,6 +59,28 @@ export const staggerItem: Variants = {
   },
 };
 
+/**
+ * Richer reveal for scroll-into-view grids (e.g. the home "browse all" tiles).
+ * Tiles rise a little further and scale up, giving a smoother, more modern
+ * entrance than the standard `staggerItem` when driven by `whileInView`.
+ */
+export const revealTileContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.08, delayChildren: 0.04 },
+  },
+};
+
+export const revealTile: Variants = {
+  hidden: { opacity: 0, y: 28, scale: 0.94 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.55, ease: EASE_OUT },
+  },
+};
+
 /* ── Hover / tap presets (interaction, not mount) ───────────────────────── */
 
 /** `whileHover` — Spotify-style card lift. */
@@ -91,3 +113,5 @@ function toInstant(variants: Variants): Variants {
 export const fadeSlideInReduced = toInstant(fadeSlideIn);
 export const staggerContainerReduced = toInstant(staggerContainer);
 export const staggerItemReduced = toInstant(staggerItem);
+export const revealTileContainerReduced = toInstant(revealTileContainer);
+export const revealTileReduced = toInstant(revealTile);
