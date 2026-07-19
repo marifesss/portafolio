@@ -4,8 +4,7 @@ import Link from "next/link";
 import type { Project } from "@/lib/types";
 import { Chip } from "@/components/ui/Chip";
 import { Badge } from "@/components/ui/Badge";
-import { AlbumArtPlaceholder } from "@/components/ui/AlbumArtPlaceholder";
-import { hueFor } from "@/features/projects/covers";
+import { ProjectCover } from "@/features/projects/ProjectCover";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 /** Where the "notify me" bell sends its prefilled email. */
@@ -31,10 +30,9 @@ export function ComingSoonDetail({ project }: { project: Project }) {
       <header className="bg-gradient-to-b from-spotify/25 to-transparent px-6 pb-8 pt-16 sm:px-10">
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-end">
           <div className="relative w-36 max-w-full shrink-0 sm:w-52">
-            <AlbumArtPlaceholder
+            <ProjectCover
               fill
-              glyph="💿"
-              hue={hueFor(project.slug)}
+              project={project}
               label={`${project.title} — ${t.unreleased}`}
             />
             {/* Bell corner badge — ties the cover to the notify action. */}
