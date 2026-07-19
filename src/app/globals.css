@@ -63,6 +63,11 @@
 
 html {
   color-scheme: dark;
+  /* Nudge the whole rem scale up so type reads at Spotify-desktop size
+     (16px → 18px base). Everything sized in rem grows proportionally. */
+  font-size: 112.5%;
+  /* Smooth in-page anchor jumps; neutralized under reduced-motion below. */
+  scroll-behavior: smooth;
 }
 
 body {

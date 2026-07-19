@@ -25,7 +25,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <Sidebar />
         </aside>
 
-        <main className="surface-panel min-h-0 overflow-y-auto rounded-lg">
+        <main className="surface-panel min-h-0 scroll-smooth overflow-y-auto rounded-lg">
           {/* Sticky top-right toggle: stays pinned while the panel scrolls, but
               takes no layout space (the negative margin cancels its height) so
               it overlays each section's own top padding instead of overlapping

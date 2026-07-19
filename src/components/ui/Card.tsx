@@ -14,7 +14,7 @@ interface CardProps {
 export function Card({ children, className = "" }: CardProps) {
   return (
     <div
-      className={`group rounded-lg bg-elevated p-4 transition-colors duration-300 hover:bg-highlight ${className}`}
+      className={`group rounded-lg bg-elevated p-4 shadow-sm transition-[background-color,transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:bg-highlight hover:shadow-xl active:translate-y-0 active:duration-100 ${className}`}
     >
       {children}
     </div>
