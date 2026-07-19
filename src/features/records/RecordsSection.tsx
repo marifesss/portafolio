@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { records } from "@/content/records";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -34,17 +35,31 @@ export function RecordsSection() {
           <motion.li
             key={pick(record.title)}
             variants={m.staggerItem}
-            className="flex items-center gap-4 rounded-md px-3 py-3 transition-colors hover:bg-white/10"
+            className="flex items-center gap-4 rounded-md px-3 py-4 transition-colors hover:bg-white/10"
           >
-            {/* Emoji as the track "cover". */}
-            <AlbumArtPlaceholder
-              size={52}
-              glyph={record.icon}
-              hue={RECORD_HUES[i % RECORD_HUES.length]}
-            />
+            {/* Real cover art, with the emoji tile as a fallback. */}
+            {record.image ? (
+              <div className="relative h-[68px] w-[68px] shrink-0 overflow-hidden rounded-md shadow ring-1 ring-black/20">
+                <Image
+                  src={record.image}
+                  alt=""
+                  fill
+                  sizes="68px"
+                  className="object-cover"
+                />
+              </div>
+            ) : (
+              <AlbumArtPlaceholder
+                size={68}
+                glyph={record.icon}
+                hue={RECORD_HUES[i % RECORD_HUES.length]}
+              />
+            )}
             <div className="min-w-0">
-              <h2 className="font-semibold text-white">{pick(record.title)}</h2>
-              <p className="mt-1 text-sm leading-relaxed text-muted">
+              <h2 className="text-lg font-semibold text-white">
+                {pick(record.title)}
+              </h2>
+              <p className="mt-1 text-base leading-relaxed text-muted">
                 {pick(record.description)}
               </p>
             </div>
@@ -54,17 +69,25 @@ export function RecordsSection() {
         {/* Non-blocking placeholder for future LinkedIn certifications. */}
         <motion.li
           variants={m.staggerItem}
-          className="mt-1 flex items-center gap-4 rounded-md border border-dashed border-white/15 px-3 py-3"
+          className="mt-1 flex items-center gap-4 rounded-md border border-dashed border-white/15 px-3 py-4"
         >
-          <div className="grid h-[52px] w-[52px] shrink-0 place-items-center rounded-md bg-white/5 text-2xl opacity-70">
-            <span aria-hidden>📜</span>
+          <div className="relative h-[68px] w-[68px] shrink-0 overflow-hidden rounded-md shadow ring-1 ring-black/20 opacity-90">
+            <Image
+              src="/images/todo/linkedin.jpeg"
+              alt=""
+              fill
+              sizes="68px"
+              className="object-cover"
+            />
           </div>
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <h2 className="font-semibold text-muted">{t.certifications}</h2>
+              <h2 className="text-lg font-semibold text-muted">
+                {t.certifications}
+              </h2>
               <Badge>{t.comingSoon}</Badge>
             </div>
-            <p className="mt-1 text-sm leading-relaxed text-faint">
+            <p className="mt-1 text-base leading-relaxed text-faint">
               {t.certificationsSoon}
             </p>
           </div>
