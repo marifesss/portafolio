@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { experience } from "@/content/experience";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -32,12 +33,28 @@ export function ExperienceSection() {
             {/* Album header: label art + company as the "label", role/period. */}
             <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-end">
               <div className="w-32 max-w-full shrink-0 sm:w-44">
-                <AlbumArtPlaceholder
-                  fill
-                  glyph="🍫"
-                  hue={285}
-                  label={job.company}
-                />
+                {job.cover ? (
+                  <div
+                    role="img"
+                    aria-label={job.company}
+                    className="relative aspect-square w-full overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black/20"
+                  >
+                    <Image
+                      src={job.cover}
+                      alt={job.company}
+                      fill
+                      sizes="(max-width: 640px) 128px, 176px"
+                      className="scale-125 object-contain"
+                    />
+                  </div>
+                ) : (
+                  <AlbumArtPlaceholder
+                    fill
+                    glyph="🍫"
+                    hue={285}
+                    label={job.company}
+                  />
+                )}
               </div>
               <div className="text-center sm:text-left">
                 <p className="text-xs font-semibold uppercase tracking-widest text-muted">
