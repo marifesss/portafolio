@@ -1,6 +1,6 @@
 # 16 — Buscar (Search) feature
 
-**Status:** open
+**Status:** superseded by 23 (search folded into Home; standalone `/buscar` removed)
 **Type:** feature
 **Depends on:** 04, 06, 09, 13
 
