@@ -36,7 +36,24 @@ export function ProjectDetail({ project }: { project: Project }) {
   const activeTab: Tab = hasMaking ? tab : "overview";
 
   return (
-    <article>
+    <article className="relative isolate">
+      {/* Ambient backdrop — one fluid wash of asymmetric color pools spread
+          down the full page (the content panel only: the sidebar and player
+          live outside). Scrolling naturally descends through the pools. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          background: [
+            "radial-gradient(55rem 38rem at 12% 6%, rgba(30,215,96,0.16), transparent 65%)",
+            "radial-gradient(50rem 36rem at 88% 24%, rgba(56,132,255,0.13), transparent 65%)",
+            "radial-gradient(55rem 40rem at 15% 48%, rgba(168,85,247,0.12), transparent 65%)",
+            "radial-gradient(50rem 36rem at 85% 70%, rgba(30,215,96,0.10), transparent 65%)",
+            "radial-gradient(55rem 40rem at 25% 92%, rgba(56,132,255,0.10), transparent 65%)",
+          ].join(", "),
+        }}
+      />
+
       {/* Album-style header: cover + eyebrow meta + title + role ("artist"). */}
       <header className="bg-gradient-to-b from-spotify/25 to-transparent px-6 pb-8 pt-16 sm:px-10">
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-end">
@@ -111,6 +128,24 @@ export function ProjectDetail({ project }: { project: Project }) {
               "aria-labelledby": "tab-overview",
             })}
           >
+            {/* Links up top — repo/demo/figma are what recruiters reach for first. */}
+            {project.links.length > 0 && (
+              <ul className="flex flex-wrap gap-3">
+                {project.links.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full border border-white/15 px-4 py-2 text-sm text-white transition-colors hover:border-spotify hover:text-spotify"
+                    >
+                      {pick(link.label)} ↗
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+
             {paragraphs(pick(project.description))}
 
             {project.stack.length > 0 && (
@@ -141,27 +176,6 @@ export function ProjectDetail({ project }: { project: Project }) {
               </div>
             )}
 
-            {project.links.length > 0 && (
-              <div>
-                <h2 className="mb-3 text-sm font-bold uppercase tracking-widest text-muted">
-                  {t.links}
-                </h2>
-                <ul className="flex flex-wrap gap-3">
-                  {project.links.map((link) => (
-                    <li key={link.href}>
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="rounded-full border border-white/15 px-4 py-2 text-sm text-white transition-colors hover:border-spotify hover:text-spotify"
-                      >
-                        {pick(link.label)} ↗
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
           </div>
         ) : (
           project.making && (
