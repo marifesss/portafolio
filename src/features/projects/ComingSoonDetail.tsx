@@ -5,24 +5,16 @@ import type { Project } from "@/lib/types";
 import { Chip } from "@/components/ui/Chip";
 import { Badge } from "@/components/ui/Badge";
 import { ProjectCover } from "@/features/projects/ProjectCover";
+import { NotifyForm } from "@/features/projects/NotifyForm";
 import { useLanguage } from "@/i18n/LanguageProvider";
-
-/** Where the "notify me" bell sends its prefilled email. */
-const NOTIFY_EMAIL = "marianafes15@gmail.com";
 
 /**
  * Pre-launch "unreleased album" view for a `comingSoon` project (Partela).
- * Shows a blank disc cover, the stack, and a bell → prefilled `mailto:` — but
- * deliberately hides what the product does (no description, gallery, or links).
+ * Shows a blank disc cover, the stack, and a waitlist signup — but deliberately
+ * hides what the product does (no description, gallery, or links).
  */
 export function ComingSoonDetail({ project }: { project: Project }) {
   const { pick, t } = useLanguage();
-
-  const subject = `${t.notifySubject} ${project.title}`;
-  const body = `${t.notifyBody} ${project.title}.`;
-  const mailto = `mailto:${NOTIFY_EMAIL}?subject=${encodeURIComponent(
-    subject,
-  )}&body=${encodeURIComponent(body)}`;
 
   return (
     <article>
@@ -87,13 +79,8 @@ export function ComingSoonDetail({ project }: { project: Project }) {
           </div>
         )}
 
-        {/* Bell → prefilled email. The primary (and only) call to action. */}
-        <a
-          href={mailto}
-          className="inline-flex items-center gap-2 rounded-full bg-spotify px-6 py-3 font-bold text-black transition-transform hover:scale-105"
-        >
-          {t.notifyMe}
-        </a>
+        {/* Waitlist signup. The primary (and only) call to action. */}
+        <NotifyForm projectTitle={project.title} />
       </div>
     </article>
   );
