@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { records } from "@/content/records";
+import { CertificationsTrack } from "@/features/records/CertificationsTrack";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Badge } from "@/components/ui/Badge";
 import { AlbumArtPlaceholder } from "@/components/ui/AlbumArtPlaceholder";
 import { useSectionMotion } from "@/components/motion/SectionTransition";
 import { useLanguage } from "@/i18n/LanguageProvider";
@@ -17,12 +17,15 @@ export function RecordsSection() {
   const { pick, t } = useLanguage();
   const m = useSectionMotion();
 
+  // +1 — "Certificaciones" is a track of this playlist too, just an expandable one.
+  const trackCount = records.length + 1;
+
   return (
     <section>
       <SectionHeader
         eyebrow={t.recordsEyebrow}
         title={t.recordsTitle}
-        subtitle={`${t.offTheCode} · ${records.length} ${t.tracks}`}
+        subtitle={`${t.offTheCode} · ${trackCount} ${t.tracks}`}
       />
 
       <motion.ul
@@ -66,31 +69,9 @@ export function RecordsSection() {
           </motion.li>
         ))}
 
-        {/* Non-blocking placeholder for future LinkedIn certifications. */}
-        <motion.li
-          variants={m.staggerItem}
-          className="mt-1 flex items-center gap-4 rounded-md border border-dashed border-white/15 px-3 py-4"
-        >
-          <div className="relative h-[68px] w-[68px] shrink-0 overflow-hidden rounded-md shadow ring-1 ring-black/20 opacity-90">
-            <Image
-              src="/images/todo/linkedin.jpeg"
-              alt=""
-              fill
-              sizes="68px"
-              className="object-cover"
-            />
-          </div>
-          <div className="min-w-0">
-            <div className="flex flex-wrap items-center gap-2">
-              <h2 className="text-lg font-semibold text-muted">
-                {t.certifications}
-              </h2>
-              <Badge>{t.comingSoon}</Badge>
-            </div>
-            <p className="mt-1 text-base leading-relaxed text-faint">
-              {t.certificationsSoon}
-            </p>
-          </div>
+        {/* Certifications are a track too, but an expandable one. */}
+        <motion.li variants={m.staggerItem}>
+          <CertificationsTrack />
         </motion.li>
       </motion.ul>
     </section>

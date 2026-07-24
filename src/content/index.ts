@@ -11,4 +11,5 @@ export { projects, getProjectBySlug } from "./projects";
 export { experience } from "./experience";
 export { skills } from "./skills";
 export { records } from "./records";
+export { certifications } from "./certifications";
 export { contactHeading, contactChannels } from "./contact";

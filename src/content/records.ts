@@ -16,8 +16,8 @@ export const records: PersonalRecord[] = [
     title: { es: "Idiomas", en: "Languages" },
     image: "/images/todo/idiomas.jpeg",
     description: {
-      es: "Inglés C2 (certificación EF SET) · Nacionalidad venezolana y española",
-      en: "English C2 (EF SET certified) · Venezuelan and Spanish nationality",
+      es: "Español (lengua materna) · Inglés C2 (certificación EF SET) · Nacionalidad venezolana y española",
+      en: "Spanish (native) · English C2 (EF SET certified) · Venezuelan and Spanish nationality",
     },
   },
   {
@@ -25,8 +25,8 @@ export const records: PersonalRecord[] = [
     title: { es: "Logros académicos", en: "Academic achievements" },
     image: "/images/todo/logrosacademicos.jpeg",
     description: {
-      es: "Calificación perfecta (20/20) en ArrowMaze — proyecto tomado como ejemplo de referencia por el profesor para futuros semestres",
-      en: "Perfect score (20/20) on ArrowMaze — used by the professor as a reference example for future semesters",
+      es: "Medallas de oro en el colegio por excelencia académica",
+      en: "Gold medals in school for academic excellence",
     },
   },
   {
@@ -34,8 +34,8 @@ export const records: PersonalRecord[] = [
     title: { es: "Música", en: "Music" },
     image: "/images/todo/musica.jpeg",
     description: {
-      es: "Violinista graduada del Conservatorio del Colegio Emil Friedman · Ex-concertino de los Arcos Juveniles de Caracas",
-      en: "Violinist, graduate of Colegio Emil Friedman Conservatory · Former concertmaster of Arcos Juveniles de Caracas",
+      es: "Violinista graduada del Conservatorio del Colegio Emil Friedman · Ex-concertino de los Arcos Juveniles de Caracas · También canto y toco piano y guitarra",
+      en: "Violinist, graduate of Colegio Emil Friedman Conservatory · Former concertmaster of Arcos Juveniles de Caracas · I also sing and play piano and guitar",
     },
   },
   {
@@ -52,10 +52,10 @@ export const records: PersonalRecord[] = [
     title: { es: "Voluntariado", en: "Volunteering" },
     image: "/images/todo/voluntariado.jpeg",
     description: {
-      es: "Voluntaria en ProgramAcademy, dando clases de programación básica a niños de bajos recursos fuera de Venezuela (modalidad online)",
-      en: "Volunteer at ProgramAcademy, teaching basic programming to underprivileged children outside Venezuela (online)",
+      es: "Voluntaria en Progracademy, dando clases de programación básica a niños de bajos recursos fuera de Venezuela (modalidad online)",
+      en: "Volunteer at Progracademy, teaching basic programming to underprivileged children outside Venezuela (online)",
     },
   },
-  // TODO: add LinkedIn certifications as real tracks once confirmed. Until then
-  // RecordsSection renders a non-blocking "coming soon" placeholder track.
+  // The "Certificaciones" track is rendered separately by RecordsSection: it's
+  // expandable, and its content lives in `src/content/certifications.ts`.
 ];
