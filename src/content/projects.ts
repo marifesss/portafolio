@@ -42,23 +42,29 @@ export const projects: Project[] = [
     links: [
       // TODO: repo de GitHub, Figma, demo/deploy
     ],
+    // Clips are only fetched once their gallery chapter is scrolled into view;
+    // until then the mockup shows the poster, which is each clip's own first
+    // frame, so playback starts without a visible jump.
     media: [
       // Web build (landscape captures).
       {
         type: "video",
         src: "/images/yelou/videoinicialweb.mp4",
+        poster: "/images/yelou/posters/videoinicialweb.webp",
         platform: "web",
         caption: { es: "Página de inicio", en: "Landing page" },
       },
       {
         type: "video",
         src: "/images/yelou/categoriasdeservicio.mp4",
+        poster: "/images/yelou/posters/categoriasdeservicio.webp",
         platform: "web",
         caption: { es: "Categorías de servicio", en: "Service categories" },
       },
       {
         type: "video",
         src: "/images/yelou/videotrabajadorcotizacion.mp4",
+        poster: "/images/yelou/posters/videotrabajadorcotizacion.webp",
         platform: "web",
         caption: {
           es: "Cotización con un trabajador",
@@ -69,12 +75,14 @@ export const projects: Project[] = [
       {
         type: "video",
         src: "/images/yelou/iniciotelefono.mp4",
+        poster: "/images/yelou/posters/iniciotelefono.webp",
         platform: "mobile",
         caption: { es: "Inicio", en: "Home" },
       },
       {
         type: "video",
         src: "/images/yelou/mapatelefono.mp4",
+        poster: "/images/yelou/posters/mapatelefono.webp",
         platform: "mobile",
         caption: { es: "Mapa de servicios", en: "Services map" },
       },
@@ -168,11 +176,13 @@ export const projects: Project[] = [
       {
         type: "video",
         src: "/images/arrowmaze/videocompleto-parte1.webm",
+        poster: "/images/arrowmaze/posters/videocompleto-parte1.webp",
         caption: { es: "Gameplay — parte 1", en: "Gameplay — part 1" },
       },
       {
         type: "video",
         src: "/images/arrowmaze/videocompleto-parte2.webm",
+        poster: "/images/arrowmaze/posters/videocompleto-parte2.webp",
         caption: { es: "Gameplay — parte 2", en: "Gameplay — part 2" },
       },
     ],
