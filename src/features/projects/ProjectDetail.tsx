@@ -1,12 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
 import type { Project } from "@/lib/types";
 import { Chip } from "@/components/ui/Chip";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
-import { DiagramPlaceholder } from "@/components/ui/DiagramPlaceholder";
 import { ProjectGallery } from "@/features/projects/ProjectGallery";
 import { ComingSoonDetail } from "@/features/projects/ComingSoonDetail";
 import { ProjectCover } from "@/features/projects/ProjectCover";
@@ -192,38 +190,24 @@ export function ProjectDetail({ project }: { project: Project }) {
                 {paragraphs(pick(project.making.narrative))}
               </div>
 
-              {project.making.diagrams &&
-                project.making.diagrams.length > 0 && (
-                  <div>
-                    <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-muted">
-                      {t.diagrams}
-                    </h2>
-                    <ul className="grid gap-6 sm:grid-cols-2">
-                      {project.making.diagrams.map((diagram, i) => (
-                        <li key={i}>
-                          <figure>
-                            {diagram.src ? (
-                              <div className="relative aspect-[16/9] overflow-hidden rounded-lg ring-1 ring-white/10">
-                                <Image
-                                  src={diagram.src}
-                                  alt={`${project.title} — ${pick(diagram.caption)}`}
-                                  fill
-                                  sizes="(max-width: 640px) 100vw, 50vw"
-                                  className="object-contain"
-                                />
-                              </div>
-                            ) : (
-                              <DiagramPlaceholder label={t.diagramComingSoon} />
-                            )}
-                            <figcaption className="mt-2 text-center text-xs text-faint">
-                              {pick(diagram.caption)}
-                            </figcaption>
-                          </figure>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+              {/* The full architecture (backend + frontend) lives on an
+                  interactive Lucidchart board — far richer than a flattened
+                  image, and pannable/zoomable. */}
+              {project.making.diagramsUrl && (
+                <div>
+                  <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-muted">
+                    {t.diagrams}
+                  </h2>
+                  <a
+                    href={project.making.diagramsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-spotify hover:text-spotify"
+                  >
+                    {t.viewDiagrams} ↗
+                  </a>
+                </div>
+              )}
             </div>
           )
         )}

@@ -40,7 +40,7 @@ Deliberately layered — the codebase itself is a showcase of clean structure:
 ## Pending TODOs (also marked `// TODO` in `src/content`)
 
 - **Yelou** — GitHub repo link, live demo/deploy link, Figma link. _(Web + app videos added → `public/images/yelou`, rendered via the platform-grouped detail gallery.)_
-- **ArrowMaze** — direct backend/frontend repo links, architecture diagrams. _(Screenshots + gameplay video added → `public/images/arrowmaze`, rendered via the detail-view gallery.)_
+- **ArrowMaze** — direct backend/frontend repo links. _(Screenshots + gameplay video added → `public/images/arrowmaze`, rendered via the detail-view gallery. Architecture diagrams link out to a Lucidchart board via `making.diagramsUrl`, shown as a "view diagrams" link in the "Cómo se hizo" section.)_
 - **Partela** — cover art / placeholder for the "coming soon" state.
 - **Mondelēz experience** — update end date once confirmed.
 

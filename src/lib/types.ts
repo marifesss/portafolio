@@ -58,23 +58,16 @@ export interface MediaItem {
   platform?: "web" | "mobile";
 }
 
-/** An architecture diagram in the "Cómo se hizo" tab. */
-export interface DiagramItem {
-  /** Path in /public; when absent a `DiagramPlaceholder` frame is shown. */
-  src?: string;
-  /** Caption / title shown under the frame (also the image alt text). */
-  caption: Localized;
-}
-
 /**
  * "Cómo se hizo" — the making-of narrative for a project's engineering tab:
- * how it was architected, plus optional diagrams (real or placeholder).
+ * how it was architected, plus an optional link to the architecture diagrams.
  */
 export interface ProjectMaking {
   /** Paragraphs separated by a blank line ("\n\n"), like `description`. */
   narrative: Localized;
-  /** Architecture diagrams; each renders a real image or a placeholder frame. */
-  diagrams?: DiagramItem[];
+  /** External board (e.g. Lucidchart) with the interactive architecture
+   *  diagrams; rendered as a "view diagrams" link when present. */
+  diagramsUrl?: string;
 }
 
 export interface Project {
