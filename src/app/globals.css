@@ -63,11 +63,21 @@
 
 html {
   color-scheme: dark;
-  /* Nudge the whole rem scale up so type reads at Spotify-desktop size
-     (16px → 18px base). Everything sized in rem grows proportionally. */
-  font-size: 112.5%;
+  /* Stay on the reader's own base size. Percentages (never px) so anyone who
+     raised their browser's default font keeps that. */
+  font-size: 100%;
   /* Smooth in-page anchor jumps; neutralized under reduced-motion below. */
   scroll-behavior: smooth;
+}
+
+/* Only a genuinely wide screen gets the Spotify-desktop scale-up (16px → 18px
+   base, everything in rem growing with it). Below that the extra 12.5% just
+   crowds the shell — laptops at high OS scaling report a viewport near
+   1350px, where the sidebar and the device mockups already fill the frame. */
+@media (min-width: 1536px) {
+  html {
+    font-size: 112.5%;
+  }
 }
 
 body {
