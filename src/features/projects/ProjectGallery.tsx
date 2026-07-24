@@ -71,6 +71,22 @@ function DeviceFlipChapter({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [idx, setIdx] = useState(0);
 
+  // The stage is centered within the *visible* height of the scroll panel, not
+  // a fixed 48rem — otherwise on a tall monitor the sticky content stays capped
+  // near the top and reads as "stuck up top" with dead space below. Measure the
+  // panel live so it stays centered on any screen and through orientation
+  // changes. (`100dvh` would overshoot: the panel sits below the player bar.)
+  const [portHeight, setPortHeight] = useState<number>();
+  useEffect(() => {
+    const el = scrollRoot?.current;
+    if (!el) return;
+    const update = () => setPortHeight(el.clientHeight);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [scrollRoot]);
+
   const { scrollYProgress } = useScroll({
     container: scrollRoot ?? undefined,
     target: trackRef,
@@ -151,10 +167,13 @@ function DeviceFlipChapter({
       className="relative scroll-mt-4"
       style={{ height: `${55 + items.length * 100}vh` }}
     >
-      <div className="sticky top-0 flex h-[min(48rem,calc(100dvh-8rem))] flex-col items-center justify-center gap-8">
+      <div
+        className="sticky top-0 flex flex-col items-center justify-center gap-6 py-8 sm:gap-8"
+        style={{ height: portHeight ? `${portHeight}px` : "100dvh" }}
+      >
         <motion.h3
           style={{ opacity: titleOpacity, y: titleY }}
-          className="relative text-4xl font-black tracking-tight text-white sm:text-5xl"
+          className="relative text-3xl font-black tracking-tight text-white sm:text-5xl"
         >
           {title}
         </motion.h3>
@@ -168,7 +187,7 @@ function DeviceFlipChapter({
               style={{ rotateY, transformStyle: "preserve-3d" }}
               className={
                 device === "phone"
-                  ? "relative mx-auto w-72 max-w-full"
+                  ? "relative mx-auto w-[min(17rem,26dvh)]"
                   : "relative mx-auto w-full max-w-4xl"
               }
             >
@@ -199,7 +218,7 @@ function DeviceFlipChapter({
               <motion.div
                 aria-hidden
                 style={{ opacity: sideOpacity }}
-                className="pointer-events-none absolute inset-0 mx-auto w-72 max-w-full"
+                className="pointer-events-none absolute inset-0 mx-auto w-[min(17rem,26dvh)]"
               >
                 <Image
                   src="/images/dispositivos/iphone-side.webp"
