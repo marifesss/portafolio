@@ -102,6 +102,12 @@ body {
   background-color: #6a6a6a;
 }
 
+/* Gallery clips are cropped (`object-cover`) to fill the device mockup's screen
+   cutout; expanded to the whole display they should be seen whole instead. */
+video:fullscreen {
+  object-fit: contain;
+}
+
 /* ---------------------------------------------------------------------------
  * Keyframes
  * ------------------------------------------------------------------------- */

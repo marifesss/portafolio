@@ -24,6 +24,43 @@ const FLIP_END = 0.94;
 /** Share of each flip segment spent resting on the clip before spinning. */
 const DWELL = 0.55;
 
+/**
+ * True on phone-sized viewports, where the clip inside the mockup is too small
+ * to read and a tap should hand it over to the device's native player.
+ */
+function useCompactViewport() {
+  const [compact, setCompact] = useState(false);
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 768px)");
+    const update = () => setCompact(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+  return compact;
+}
+
+type FullscreenVideo = HTMLVideoElement & {
+  /** iOS Safari has no element Fullscreen API — only this on `<video>`. */
+  webkitEnterFullscreen?: () => void;
+  webkitRequestFullscreen?: () => void;
+};
+
+/** Blows the clip up to the whole screen, with native controls while expanded. */
+function openFullscreen(el: HTMLVideoElement | null) {
+  const video = el as FullscreenVideo | null;
+  if (!video) return;
+  // Only while expanded — the inline clip stays chrome-free.
+  video.controls = true;
+  if (video.requestFullscreen) {
+    void video.requestFullscreen().catch(() => {});
+  } else if (video.webkitEnterFullscreen) {
+    video.webkitEnterFullscreen();
+  } else if (video.webkitRequestFullscreen) {
+    video.webkitRequestFullscreen();
+  }
+}
+
 /** The device's back, seen mid-spin: the real back-view mockup photo. */
 function DeviceBack({ device }: { device: DeviceKind }) {
   return (
@@ -65,11 +102,12 @@ function DeviceFlipChapter({
   device: DeviceKind;
   projectTitle: string;
 }) {
-  const { pick } = useLanguage();
+  const { pick, t } = useLanguage();
   const scrollRoot = useScrollAreaRef();
   const trackRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [idx, setIdx] = useState(0);
+  const canExpand = useCompactViewport();
 
   // The stage is centered within the *visible* height of the scroll panel, not
   // a fixed 48rem — otherwise on a tall monitor the sticky content stays capped
@@ -145,19 +183,62 @@ function DeviceFlipChapter({
     void videoRef.current?.play().catch(() => {});
   }, [idx]);
 
+  // Leaving fullscreen puts the clip back to its bare, inline state.
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    const restore = () => {
+      if (!document.fullscreenElement) el.controls = false;
+    };
+    document.addEventListener("fullscreenchange", restore);
+    el.addEventListener("webkitendfullscreen", restore);
+    return () => {
+      document.removeEventListener("fullscreenchange", restore);
+      el.removeEventListener("webkitendfullscreen", restore);
+    };
+  }, []);
+
   const item = items[idx];
-  const video = (
-    <video
-      ref={videoRef}
-      src={item.src}
-      poster={item.poster}
-      autoPlay
-      muted
-      loop
-      playsInline
-      aria-label={`${projectTitle} — ${pick(item.caption)}`}
-      className="block h-full w-full bg-black object-cover"
-    />
+  const screen = (
+    <>
+      <video
+        ref={videoRef}
+        src={item.src}
+        poster={item.poster}
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-label={`${projectTitle} — ${pick(item.caption)}`}
+        className="block h-full w-full bg-black object-cover"
+      />
+
+      {/* On phones the mockup screen is thumbnail-sized: tapping it hands the
+          clip to the native fullscreen player. */}
+      {canExpand && (
+        <button
+          type="button"
+          onClick={() => openFullscreen(videoRef.current)}
+          aria-label={t.expandVideo}
+          className="absolute inset-0 flex items-end justify-end p-1.5"
+        >
+          <span className="flex items-center gap-1 rounded-full bg-black/60 p-1.5 text-white backdrop-blur-sm">
+            <svg
+              aria-hidden
+              viewBox="0 0 24 24"
+              className="h-3.5 w-3.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M9 3H3v6M15 3h6v6M9 21H3v-6M15 21h6v-6" />
+            </svg>
+          </span>
+        </button>
+      )}
+    </>
   );
 
   return (
@@ -194,9 +275,9 @@ function DeviceFlipChapter({
               {/* Front — the device with its screen. */}
               <div style={{ backfaceVisibility: "hidden" }}>
                 {device === "phone" ? (
-                  <PhoneFrame>{video}</PhoneFrame>
+                  <PhoneFrame>{screen}</PhoneFrame>
                 ) : (
-                  <LaptopFrame>{video}</LaptopFrame>
+                  <LaptopFrame>{screen}</LaptopFrame>
                 )}
               </div>
               {/* Back — the shell seen mid-spin. */}
