@@ -131,6 +131,16 @@ describe("content", () => {
     expect(missing).toEqual([]);
   });
 
+  it("points every project link at an absolute external URL", () => {
+    const links = projects.flatMap((project) =>
+      project.links.map((link) => `${project.slug}: ${link.href}`),
+    );
+
+    for (const entry of links) {
+      expect(entry.split(": ")[1]).toMatch(/^https:\/\//);
+    }
+  });
+
   it("references only assets that exist in public/", () => {
     const missing = collectAssetPaths(everything).filter(
       (entry) => !existsSync(join(PUBLIC_DIR, entry.split(" → ")[1])),

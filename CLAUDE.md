@@ -39,8 +39,11 @@ Deliberately layered — the codebase itself is a showcase of clean structure:
 
 ## Pending TODOs (also marked `// TODO` in `src/content`)
 
-- **Yelou** — GitHub repo link, live demo/deploy link, Figma link. _(Web + app videos added → `public/images/yelou`, rendered via the platform-grouped detail gallery.)_
-- **ArrowMaze** — direct backend/frontend repo links. _(Screenshots + gameplay video added → `public/images/arrowmaze`, rendered via the detail-view gallery. Architecture diagrams link out to a Lucidchart board via `making.diagramsUrl`, shown as a "view diagrams" link in the "Cómo se hizo" section.)_
+- **Yelou** — live demo/deploy link, Figma link. _(Source is closed: the project
+  sets `privateCode: true`, which renders a "código privado" pill where the repo
+  link would go.)_ _(Web + app videos added → `public/images/yelou`, rendered via the platform-grouped detail gallery.)_
+- **ArrowMaze** — _(Repos linked: `arrowmaze-backend` + `arrowmaze-frontend` under
+  the DS-PROYECTO-ARROW-MAZE org.)_ _(Screenshots + gameplay video added → `public/images/arrowmaze`, rendered via the detail-view gallery. Architecture diagrams link out to a Lucidchart board via `making.diagramsUrl`, shown as a "view diagrams" link in the "Cómo se hizo" section.)_
 - **Partela** — cover art / placeholder for the "coming soon" state. _(Waitlist
   form wired to Web3Forms via `src/content/notify.ts`; emptying the key there
   falls the bell back to `mailto:`.)_

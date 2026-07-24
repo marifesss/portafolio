@@ -39,9 +39,9 @@ export const projects: Project[] = [
         items: ["Google Gemini", "Algolia"],
       },
     ],
-    links: [
-      // TODO: repo de GitHub, Figma, demo/deploy
-    ],
+    // TODO: Figma, demo/deploy
+    links: [],
+    privateCode: true,
     // Clips are only fetched once their gallery chapter is scrolled into view;
     // until then the mockup shows the poster, which is each clip's own first
     // frame, so playback starts without a visible jump.
@@ -161,8 +161,17 @@ export const projects: Project[] = [
         items: ["Jest", "flutter_test"],
       },
     ],
+    // Two independent repos under the DS-PROYECTO-ARROW-MAZE org, one per
+    // side of the system — the split is part of what the project shows.
     links: [
-      // TODO: repos directos (GitHub org DS-PROYECTO-ARROW-MAZE)
+      {
+        label: { es: "Backend (NestJS)", en: "Backend (NestJS)" },
+        href: "https://github.com/DS-PROYECTO-ARROW-MAZE/arrowmaze-backend",
+      },
+      {
+        label: { es: "Juego (Flutter)", en: "Game (Flutter)" },
+        href: "https://github.com/DS-PROYECTO-ARROW-MAZE/arrowmaze-frontend",
+      },
     ],
     making: {
       narrative: {

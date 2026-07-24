@@ -97,6 +97,11 @@ export interface Project {
   stackGroups?: StackGroup[];
   /** External links (repo, demo, figma...). */
   links: ProjectLink[];
+  /**
+   * The source isn't public. Says so on the detail view, so the absence of a
+   * repo link reads as a decision rather than an omission.
+   */
+  privateCode?: boolean;
   /** "Coming soon" tracks render a locked/blurred cover. */
   comingSoon?: boolean;
   /** Optional cover art path in /public. */

@@ -126,9 +126,11 @@ export function ProjectDetail({ project }: { project: Project }) {
               "aria-labelledby": "tab-overview",
             })}
           >
-            {/* Links up top — repo/demo/figma are what recruiters reach for first. */}
-            {project.links.length > 0 && (
-              <ul className="flex flex-wrap gap-3">
+            {/* Links up top — repo/demo/figma are what recruiters reach for
+                first. When there's no repo to link because the source is
+                closed, say so in their place rather than leaving a gap. */}
+            {(project.links.length > 0 || project.privateCode) && (
+              <ul className="flex flex-wrap items-center gap-3">
                 {project.links.map((link) => (
                   <li key={link.href}>
                     <a
@@ -141,6 +143,11 @@ export function ProjectDetail({ project }: { project: Project }) {
                     </a>
                   </li>
                 ))}
+                {project.privateCode && (
+                  <li className="rounded-full border border-dashed border-white/15 px-4 py-2 text-sm text-faint">
+                    🔒 {t.privateCode}
+                  </li>
+                )}
               </ul>
             )}
 
