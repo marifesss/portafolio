@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { navigation } from "@/content";
@@ -76,9 +77,19 @@ export function MobileTabBar() {
                         active ? "bg-white/10 text-white" : "text-muted"
                       }`}
                     >
-                      <span aria-hidden className="text-lg">
-                        {item.icon}
-                      </span>
+                      {item.cover ? (
+                        <Image
+                          src={item.cover}
+                          alt=""
+                          width={36}
+                          height={36}
+                          className="h-9 w-9 shrink-0 rounded object-cover ring-1 ring-black/20"
+                        />
+                      ) : (
+                        <span aria-hidden className="text-lg">
+                          {item.icon}
+                        </span>
+                      )}
                       {pick(item.label)}
                     </Link>
                   </li>
@@ -99,9 +110,23 @@ export function MobileTabBar() {
                 aria-current={active ? "page" : undefined}
                 className={tabClass(active)}
               >
-                <span aria-hidden className="text-xl">
-                  {item.icon}
-                </span>
+                {item.cover ? (
+                  <Image
+                    src={item.cover}
+                    alt=""
+                    width={28}
+                    height={28}
+                    className={`h-7 w-7 rounded object-cover transition ${
+                      active
+                        ? "ring-2 ring-spotify"
+                        : "opacity-70 ring-1 ring-black/20"
+                    }`}
+                  />
+                ) : (
+                  <span aria-hidden className="text-xl">
+                    {item.icon}
+                  </span>
+                )}
                 <span className="max-w-full truncate">{pick(item.label)}</span>
               </Link>
             </li>
@@ -117,9 +142,17 @@ export function MobileTabBar() {
               aria-expanded={moreOpen}
               className={tabClass(overflowActive || moreOpen)}
             >
-              <span aria-hidden className="text-xl">
-                ☰
-              </span>
+              <svg
+                aria-hidden
+                viewBox="0 0 24 24"
+                className="h-7 w-7"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              >
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              </svg>
               <span className="max-w-full truncate">{t.more}</span>
             </button>
           </li>

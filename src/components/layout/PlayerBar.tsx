@@ -194,7 +194,7 @@ export function PlayerBar() {
 
   return (
     <footer className="border-t border-white/5 bg-base">
-      <div className="grid grid-cols-[1fr_auto] items-center gap-3 px-4 py-4 md:grid-cols-3 md:gap-6 md:px-6">
+      <div className="grid grid-cols-[1fr_auto] items-center gap-3 px-4 py-2.5 md:grid-cols-3 md:gap-6 md:px-6 md:py-3">
         {/* Left — the "track" that is now playing. */}
         <div className="flex min-w-0 items-center gap-3">
           <Image
@@ -202,7 +202,7 @@ export function PlayerBar() {
             alt={site.name}
             width={56}
             height={56}
-            className="h-14 w-14 shrink-0 rounded-md object-cover shadow-lg ring-1 ring-black/30"
+            className="h-11 w-11 shrink-0 rounded-md object-cover shadow-lg ring-1 ring-black/30 md:h-14 md:w-14"
           />
           <div className="min-w-0">
             <p className="truncate text-[15px] font-semibold leading-tight text-white">
