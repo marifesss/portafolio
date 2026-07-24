@@ -3,6 +3,8 @@ import type { Localized } from "@/lib/types";
 /** Global site identity: name + taglines used across the shell. */
 export const site = {
   name: "Mariana Fes",
+  /** Host the site is served from; backs `metadataBase` in the root layout.
+   *  TODO: point at the real deploy (e.g. the Vercel domain) once it's live. */
   domain: "marianafes.dev",
 
   /** Long tagline (hero). */
