@@ -63,7 +63,7 @@ export function ProjectDetail({ project }: { project: Project }) {
             <p className="text-xs font-semibold uppercase tracking-widest text-muted">
               {pick(project.meta)}
             </p>
-            <h1 className="mt-2 text-4xl font-black tracking-tight text-white sm:text-6xl">
+            <h1 className="mt-2 text-display font-black tracking-tight text-white">
               {project.title}
             </h1>
             <p className="mt-4 text-lg font-semibold text-white">

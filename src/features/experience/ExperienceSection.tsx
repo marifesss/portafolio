@@ -60,7 +60,7 @@ export function ExperienceSection() {
                 <p className="text-xs font-semibold uppercase tracking-widest text-muted">
                   {t.recordLabel}
                 </p>
-                <h2 className="mt-2 text-3xl font-black tracking-tight text-white sm:text-4xl">
+                <h2 className="mt-2 text-heading font-black tracking-tight text-white">
                   {job.company}
                 </h2>
                 <p className="mt-3 text-muted">

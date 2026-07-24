@@ -28,6 +28,28 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Display type — fluid, not stepped.
+   *
+   * These replace `text-4xl sm:text-6xl` pairs, which reached their largest
+   * step at 640px and then never moved: a 1360px laptop panel and a 2560px
+   * monitor both got a 60px title, and on the laptop it swallowed the view.
+   * Each token ramps with the viewport between a phone floor and the size the
+   * design was drawn at (1920px), so the shell keeps the same proportions on
+   * any screen. The `rem` part keeps a reader's own font size in play. */
+
+  /* Page titles: sections, project detail, coming-soon. 36px → 60px */
+  --text-display: clamp(2.25rem, 0.33rem + 2.85vw, 3.75rem);
+  --text-display--line-height: 1.05;
+  /* The profile hero, one step above everything else. 48px → 72px */
+  --text-hero: clamp(3rem, 0.23rem + 3.56vw, 4.5rem);
+  --text-hero--line-height: 1.05;
+  /* Gallery chapter titles ("Web", "App móvil"). 30px → 48px */
+  --text-chapter: clamp(1.875rem, 0.44rem + 2.14vw, 3rem);
+  --text-chapter--line-height: 1.1;
+  /* Sub-headings inside a section. 30px → 36px */
+  --text-heading: clamp(1.875rem, 0.97rem + 1.07vw, 2.25rem);
+  --text-heading--line-height: 1.15;
 }
 
 /* ---------------------------------------------------------------------------
@@ -63,21 +85,13 @@
 
 html {
   color-scheme: dark;
-  /* Stay on the reader's own base size. Percentages (never px) so anyone who
-     raised their browser's default font keeps that. */
-  font-size: 100%;
+  /* Base size ramps with the viewport: the reader's own default up to ~1370px,
+     growing to the Spotify-desktop 18px on a wide monitor. Everything sized in
+     rem — spacing, the sidebar, row heights — follows it. Expressed in rem
+     (never px) so a reader who raised their browser's default keeps it. */
+  font-size: clamp(1rem, 0.72rem + 0.33vw, 1.125rem);
   /* Smooth in-page anchor jumps; neutralized under reduced-motion below. */
   scroll-behavior: smooth;
-}
-
-/* Only a genuinely wide screen gets the Spotify-desktop scale-up (16px → 18px
-   base, everything in rem growing with it). Below that the extra 12.5% just
-   crowds the shell — laptops at high OS scaling report a viewport near
-   1350px, where the sidebar and the device mockups already fill the frame. */
-@media (min-width: 1536px) {
-  html {
-    font-size: 112.5%;
-  }
 }
 
 body {

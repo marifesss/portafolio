@@ -107,6 +107,14 @@ a ▶**. Header row is small, muted, uppercase-ish, with a bottom divider.
 
 - Headings: heavy weight, **tight tracking**, large scale for hero/detail
   titles. Body/meta: normal weight, muted greys. (We use Geist; lean bold.)
+- The display scale is **fluid, never stepped**. Use the `text-display`,
+  `text-hero`, `text-chapter` and `text-heading` tokens (defined in
+  `globals.css` `@theme`) instead of `text-4xl sm:text-6xl` pairs: those hit
+  their largest step at 640px and then stop, so a 1360px laptop and a 2560px
+  monitor got the same title. The tokens ramp with the viewport between a
+  phone floor and the size the design was drawn at (1920px). The root
+  font-size ramps the same way, so everything sized in rem — spacing, the
+  sidebar, row heights — follows along.
 - Motion is **rich but restrained**: hover highlights, card lift, staggered
   entrances, section fade/slide, animated equalizer. Respect
   `prefers-reduced-motion`.

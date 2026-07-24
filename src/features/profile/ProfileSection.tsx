@@ -35,7 +35,7 @@ export function ProfileSection() {
           <p className="text-xs font-semibold uppercase tracking-widest text-muted">
             {t.profileEyebrow}
           </p>
-          <h1 className="mt-2 text-5xl font-black tracking-tight text-white sm:text-7xl">
+          <h1 className="mt-2 text-hero font-black tracking-tight text-white">
             {site.name}
           </h1>
           <p className="mt-4 text-sm text-muted">

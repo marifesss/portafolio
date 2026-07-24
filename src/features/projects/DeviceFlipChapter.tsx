@@ -301,7 +301,7 @@ export function DeviceFlipChapter({
       >
         <motion.h3
           style={{ opacity: titleOpacity, y: titleY }}
-          className="relative text-3xl font-black tracking-tight text-white sm:text-5xl"
+          className="relative text-chapter font-black tracking-tight text-white"
         >
           {title}
         </motion.h3>

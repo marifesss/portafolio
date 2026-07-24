@@ -58,7 +58,7 @@ export function ProjectsSection() {
             <p className="text-xs font-semibold uppercase tracking-widest text-muted">
               {t.playlist}
             </p>
-            <h1 className="mt-2 text-4xl font-black tracking-tight text-white sm:text-6xl">
+            <h1 className="mt-2 text-display font-black tracking-tight text-white">
               {t.projectsTitle}
             </h1>
             <p className="mt-4 text-sm text-muted">

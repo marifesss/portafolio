@@ -288,7 +288,7 @@ export function HomeSection() {
           <p className="mt-10 text-sm font-semibold uppercase tracking-widest text-spotify">
             {site.name}
           </p>
-          <h1 className="mt-2 text-4xl font-black leading-tight tracking-tight sm:text-6xl">
+          <h1 className="mt-2 text-display font-black tracking-tight">
             {pick(greetings[daypart])}
           </h1>
           <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted sm:text-xl">
