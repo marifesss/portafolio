@@ -74,7 +74,7 @@ export function ComingSoonDetail({ project }: { project: Project }) {
           {t.comingSoonTeaser}
         </p>
 
-        {project.stack.length > 0 && (
+        {project.stack && project.stack.length > 0 && (
           <div>
             <h2 className="mb-3 text-sm font-bold uppercase tracking-widest text-muted">
               {t.stack}

@@ -40,6 +40,16 @@ export interface ProjectLink {
   href: string;
 }
 
+/**
+ * One layer of a project's stack (e.g. "Móvil", "Base de datos"). Used when a
+ * flat chip cloud would hide the shape of the system — grouping the techs by
+ * layer is itself part of what the project shows.
+ */
+export interface StackGroup {
+  label: Localized;
+  items: string[];
+}
+
 /** A screenshot or video shown in a project's gallery. */
 export interface MediaItem {
   /** `image` renders an optimized picture; `video` a native player. */
@@ -81,8 +91,10 @@ export interface Project {
   meta: Localized;
   /** One-paragraph description. */
   description: Localized;
-  /** Tech stack chips. */
-  stack: string[];
+  /** Tech stack chips. Omit when `stackGroups` carries the stack instead. */
+  stack?: string[];
+  /** Stack broken down by layer. Takes precedence over `stack` when present. */
+  stackGroups?: StackGroup[];
   /** External links (repo, demo, figma...). */
   links: ProjectLink[];
   /** "Coming soon" tracks render a locked/blurred cover. */
@@ -143,6 +155,27 @@ export interface PersonalRecord {
   title: Localized;
   description: Localized;
   /** Optional cover art path in /public; falls back to the emoji tile. */
+  image?: string;
+}
+
+/**
+ * A certification, listed inside the expandable "Certificaciones" track of the
+ * personal-records playlist.
+ */
+export interface Certification {
+  /** Stable key, also the React list key. */
+  id: string;
+  /** Course / certificate name — kept as-is when it has no translation. */
+  name: Localized;
+  /** Who issued it (Udemy, UCAB, EF SET…). */
+  issuer: string;
+  /** Human-readable issue date. */
+  date: Localized;
+  /** One-line extra detail (level, hours…). */
+  detail?: Localized;
+  /** Public verification / credential URL. */
+  href?: string;
+  /** Certificate scan in /public. Certs verified online may not have one. */
   image?: string;
 }
 

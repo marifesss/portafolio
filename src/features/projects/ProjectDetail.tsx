@@ -146,17 +146,45 @@ export function ProjectDetail({ project }: { project: Project }) {
 
             {paragraphs(pick(project.description))}
 
-            {project.stack.length > 0 && (
+            {/* Stack: broken down by layer when the project defines one (the
+                shape of the system is part of what it shows), flat otherwise. */}
+            {project.stackGroups ? (
               <div>
-                <h2 className="mb-3 text-sm font-bold uppercase tracking-widest text-muted">
+                <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-muted">
                   {t.stack}
                 </h2>
-                <div className="flex flex-wrap gap-2">
-                  {project.stack.map((tech) => (
-                    <Chip key={tech}>{tech}</Chip>
+                <dl className="space-y-4">
+                  {project.stackGroups.map((group) => (
+                    <div
+                      key={pick(group.label)}
+                      className="sm:grid sm:grid-cols-[11rem_1fr] sm:gap-4"
+                    >
+                      <dt className="text-sm font-semibold text-white sm:pt-1">
+                        {pick(group.label)}
+                      </dt>
+                      <dd className="mt-2 flex flex-wrap gap-2 sm:mt-0">
+                        {group.items.map((tech) => (
+                          <Chip key={tech}>{tech}</Chip>
+                        ))}
+                      </dd>
+                    </div>
                   ))}
-                </div>
+                </dl>
               </div>
+            ) : (
+              project.stack &&
+              project.stack.length > 0 && (
+                <div>
+                  <h2 className="mb-3 text-sm font-bold uppercase tracking-widest text-muted">
+                    {t.stack}
+                  </h2>
+                  <div className="flex flex-wrap gap-2">
+                    {project.stack.map((tech) => (
+                      <Chip key={tech}>{tech}</Chip>
+                    ))}
+                  </div>
+                </div>
+              )
             )}
 
             {/* Gallery: real media if present; a designed placeholder otherwise. */}
