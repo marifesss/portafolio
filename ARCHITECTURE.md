@@ -64,5 +64,6 @@ src/
 | New sidebar section      | `src/content/navigation.ts` + `app/<route>/` + a feature under `src/features/` |
 | New UI label             | `src/i18n/dictionary.ts` (both `es` and `en`)    |
 | Theme color / token      | `src/app/globals.css` (`@theme`)                 |
-| Project images           | `public/images/projects/`                        |
+| Project images / clips   | `public/images/<project-slug>/`                  |
+| Shared cover art         | `public/images/covers/`                          |
 ```

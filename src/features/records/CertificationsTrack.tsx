@@ -28,7 +28,7 @@ export function CertificationsTrack() {
       >
         <div className="relative h-[68px] w-[68px] shrink-0 overflow-hidden rounded-md shadow ring-1 ring-black/20">
           <Image
-            src="/images/todo/certificaciones.jpeg"
+            src="/images/covers/certificaciones.jpeg"
             alt=""
             fill
             sizes="68px"

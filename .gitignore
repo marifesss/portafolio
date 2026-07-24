@@ -43,5 +43,9 @@ next-env.d.ts
 # windows
 desktop.ini
 
+# working material (design references + content drafts), not part of the site
+/imagenesInspo/
+/contenido-portafolio-mariana.md
+
 # claude code local settings
 .claude/settings.local.json

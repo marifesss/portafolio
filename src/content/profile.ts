@@ -26,13 +26,13 @@ export const profile = {
     {
       name: "Business Intelligence",
       glyph: "📊",
-      image: "/images/todo/genero1.jpeg",
+      image: "/images/covers/genero1.jpeg",
     },
     {
       name: "Fullstack Development",
       glyph: "🧑‍💻",
-      image: "/images/todo/genero2.jpeg",
+      image: "/images/covers/genero2.jpeg",
     },
-    { name: "Fintech", glyph: "💳", image: "/images/todo/genero3.jpeg" },
+    { name: "Fintech", glyph: "💳", image: "/images/covers/genero3.jpeg" },
   ],
 } as const;
