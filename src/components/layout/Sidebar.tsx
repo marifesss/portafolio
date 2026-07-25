@@ -64,6 +64,12 @@ export function Sidebar() {
                     alt=""
                     width={96}
                     height={96}
+                    /* Persistent chrome: on desktop these sit above the fold on
+                       every route, so the default lazy loading only delays
+                       them — Next measured one as the LCP element. `eager`
+                       rather than `priority`: they should not race the route's
+                       own hero art for preload slots. */
+                    loading="eager"
                     className="h-12 w-12 shrink-0 rounded-md object-cover shadow ring-1 ring-black/20"
                   />
                 ) : (

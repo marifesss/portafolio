@@ -56,7 +56,7 @@ export function ProjectDetail({ project }: { project: Project }) {
       <header className="bg-gradient-to-b from-spotify/25 to-transparent px-gutter pb-8 pt-section">
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-end">
           <div className="w-cover max-w-full shrink-0">
-            <ProjectCover fill project={project} label={project.title} />
+            <ProjectCover priority fill project={project} label={project.title} />
           </div>
 
           <div className="text-center sm:text-left">

@@ -11,6 +11,14 @@ interface ProjectCoverProps {
   fill?: boolean;
   /** Accessible name; omit for a decorative cover. */
   label?: string;
+  /**
+   * Set on the one cover that is a route's hero art (the album-style detail
+   * headers). Those are above the fold on every viewport and are the largest
+   * thing painted, so leaving them lazy is what makes Next flag an LCP image.
+   * Never set it on list thumbnails or cards — the preload is only worth a
+   * slot for the element that actually decides LCP.
+   */
+  priority?: boolean;
 }
 
 /**
@@ -23,6 +31,7 @@ export function ProjectCover({
   size = 48,
   fill = false,
   label,
+  priority = false,
 }: ProjectCoverProps) {
   if (!project.cover) {
     return (
@@ -54,6 +63,7 @@ export function ProjectCover({
         alt={label ?? ""}
         fill
         sizes={fill ? "(max-width: 640px) 100vw, 320px" : `${size}px`}
+        priority={priority}
         className="object-cover"
       />
     </div>

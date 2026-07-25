@@ -41,7 +41,10 @@ export function ProjectsSection() {
                   src={PLAYLIST_COVER}
                   alt=""
                   fill
-                  sizes="(max-width: 640px) 144px, 208px"
+                  /* Tracks `--spacing-cover`: 136px at the floor, 221px at the
+                     cap once the root font-size nudges up on a wide monitor. */
+                  sizes="(max-width: 640px) 144px, 224px"
+                  priority
                   className="object-cover"
                 />
               </div>

@@ -23,6 +23,7 @@ export function ComingSoonDetail({ project }: { project: Project }) {
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-end">
           <div className="relative w-cover max-w-full shrink-0">
             <ProjectCover
+              priority
               fill
               project={project}
               label={`${project.title} — ${t.unreleased}`}
