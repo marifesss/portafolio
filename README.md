@@ -5,7 +5,7 @@ sección es una "playlist" y cada proyecto, una "pista". Bilingüe (ES/EN) y
 pensado para mostrar mis proyectos como developer con foco en arquitectura
 de software.
 
-🔗 **Live:** _pendiente de deploy_ <!-- TODO: pegar la URL de Vercel aquí y en src/content/site.ts -->
+🔗 **Live:** [marianafes.vercel.app](https://marianafes.vercel.app)
 
 ## Stack
 
@@ -70,16 +70,14 @@ plataforma sin descargar los videos antes de tiempo.
 
 ## Deploy
 
-Pensado para Vercel (cero configuración):
+En Vercel, vía la integración con GitHub: cada push a `main` publica a
+producción y cada pull request recibe su propia URL de preview. Cero
+configuración y cero variables de entorno — la app no lee `process.env` en
+ningún punto.
 
-```bash
-npx vercel        # primera vez: login + vincular el proyecto
-npx vercel --prod
-```
-
-Después del primer deploy hay que actualizar `domain` en
-`src/content/site.ts` — de ahí sale el `metadataBase` que resuelve las URLs
-absolutas de los metadatos.
+Si el host cambia, `domain` en `src/content/site.ts` es el único sitio a
+tocar: de ahí sale el `metadataBase` que resuelve las URLs absolutas de los
+metadatos, y también el dominio que se muestra en el pie de la sidebar.
 
 ## Contacto
 
