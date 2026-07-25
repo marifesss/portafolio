@@ -135,7 +135,7 @@ export function HomeSection() {
   const browseItems = navigation.filter((item) => item.href !== "/");
 
   return (
-    <SectionTransition className="px-6 pb-16 pt-20 sm:px-10">
+    <SectionTransition className="px-gutter pb-section pt-section">
       {/* Search field — dark, modern Spotify-style pill pinned near the top. */}
       <form role="search" onSubmit={(e) => e.preventDefault()}>
         <div className="group/search relative max-w-2xl">
@@ -309,7 +309,11 @@ export function HomeSection() {
             {t.featuredProjects}
           </h2>
           <motion.ul
-            className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3"
+            /* Card size is capped, not divided: at three fixed columns a wide
+               panel stretched each card to ~310px and a single one filled
+               three quarters of a laptop's visible height. Spotify keeps its
+               home cards small and simply fits more per row. */
+            className="grid grid-cols-2 gap-3 sm:grid-cols-[repeat(auto-fill,minmax(10.5rem,1fr))] sm:gap-4"
             variants={m.staggerContainer}
             initial="hidden"
             animate="visible"

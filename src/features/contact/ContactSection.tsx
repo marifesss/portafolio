@@ -16,7 +16,7 @@ export function ContactSection() {
     <section>
       <SectionHeader eyebrow={t.contactEyebrow} title={pick(contactHeading)} />
 
-      <div className="px-6 pb-12 sm:max-w-lg sm:px-10">
+      <div className="px-gutter pb-section sm:max-w-lg">
         {/* Reinforce the "open to work" signal right at the point of contact. */}
         <span className="inline-flex items-center gap-2 rounded-full border border-spotify/40 bg-spotify/10 px-4 py-1.5 text-sm font-semibold text-spotify">
           <span aria-hidden className="relative flex h-2 w-2">

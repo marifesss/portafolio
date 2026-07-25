@@ -18,7 +18,7 @@ export function SectionHeader({
   children,
 }: SectionHeaderProps) {
   return (
-    <header className="bg-gradient-to-b from-spotify/25 to-transparent px-6 pb-8 pt-16 sm:px-10">
+    <header className="bg-gradient-to-b from-spotify/25 to-transparent px-gutter pb-8 pt-section">
       {eyebrow && (
         <p className="text-xs font-semibold uppercase tracking-widest text-muted">
           {eyebrow}

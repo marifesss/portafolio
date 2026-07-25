@@ -53,7 +53,7 @@ export function ProjectDetail({ project }: { project: Project }) {
       />
 
       {/* Album-style header: cover + eyebrow meta + title + role ("artist"). */}
-      <header className="bg-gradient-to-b from-spotify/25 to-transparent px-6 pb-8 pt-16 sm:px-10">
+      <header className="bg-gradient-to-b from-spotify/25 to-transparent px-gutter pb-8 pt-section">
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-end">
           <div className="w-36 max-w-full shrink-0 sm:w-52">
             <ProjectCover fill project={project} label={project.title} />
@@ -73,7 +73,7 @@ export function ProjectDetail({ project }: { project: Project }) {
         </div>
       </header>
 
-      <div className="space-y-8 px-6 pb-12 sm:px-10">
+      <div className="space-y-8 px-gutter pb-section">
         <Link
           href="/proyectos"
           className="inline-flex text-sm text-muted transition-colors hover:text-white"

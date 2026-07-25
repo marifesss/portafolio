@@ -62,14 +62,14 @@ export function Sidebar() {
                   <Image
                     src={item.cover}
                     alt=""
-                    width={64}
-                    height={64}
-                    className="h-16 w-16 shrink-0 rounded-md object-cover shadow ring-1 ring-black/20"
+                    width={96}
+                    height={96}
+                    className="h-12 w-12 shrink-0 rounded-md object-cover shadow ring-1 ring-black/20"
                   />
                 ) : (
                   <span
                     aria-hidden
-                    className={`grid h-16 w-16 shrink-0 place-items-center rounded-md text-xl transition-colors ${
+                    className={`grid h-12 w-12 shrink-0 place-items-center rounded-md text-lg transition-colors ${
                       active
                         ? "bg-white/15"
                         : "bg-white/5 group-hover:bg-white/10"

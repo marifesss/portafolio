@@ -21,7 +21,7 @@ export function ExperienceSection() {
         title={t.experienceTitle}
       />
 
-      <div className="space-y-12 px-6 pb-12 sm:px-10">
+      <div className="space-y-12 px-gutter pb-section">
         {experience.map((job) => (
           <motion.article
             key={job.company}

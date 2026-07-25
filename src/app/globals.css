@@ -50,6 +50,14 @@
   /* Sub-headings inside a section. 30px → 36px */
   --text-heading: clamp(1.875rem, 0.97rem + 1.07vw, 2.25rem);
   --text-heading--line-height: 1.15;
+
+  /* Shell rhythm — also fluid, and vertical space keys off the window height,
+   * not its width. A laptop panel is barely 550px tall once the player bar is
+   * accounted for; spending a fixed 80px on every section's top padding there
+   * is what makes the UI feel oversized even after the type is right.
+   * `pt-section` / `px-gutter` / `pb-section`. */
+  --spacing-section: clamp(1.5rem, 6vh, 5rem);
+  --spacing-gutter: clamp(1.25rem, 3vw, 2.5rem);
 }
 
 /* ---------------------------------------------------------------------------

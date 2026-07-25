@@ -23,7 +23,7 @@ export function SkillsSection() {
       />
 
       <motion.ul
-        className="grid gap-6 px-6 pb-12 sm:grid-cols-2 sm:px-10"
+        className="grid gap-6 px-gutter pb-section sm:grid-cols-2"
         variants={m.staggerContainer}
         initial="hidden"
         animate="visible"

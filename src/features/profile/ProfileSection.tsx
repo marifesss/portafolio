@@ -22,7 +22,7 @@ export function ProfileSection() {
   return (
     <article>
       {/* Artist header: circle avatar · eyebrow · huge name · meta line. */}
-      <header className="flex flex-col items-center gap-6 bg-gradient-to-b from-spotify/25 to-transparent px-6 pb-8 pt-16 text-center sm:flex-row sm:items-end sm:gap-8 sm:px-10 sm:text-left">
+      <header className="flex flex-col items-center gap-6 bg-gradient-to-b from-spotify/25 to-transparent px-gutter pb-8 pt-section text-center sm:flex-row sm:items-end sm:gap-8 sm:text-left">
         <Image
           src="/images/mariana/perfil.jpeg"
           alt={site.name}
@@ -44,7 +44,7 @@ export function ProfileSection() {
         </div>
       </header>
 
-      <SectionTransition className="space-y-8 px-6 pb-16 sm:px-10">
+      <SectionTransition className="space-y-8 px-gutter pb-section">
         {/* Internship-availability callout — the loudest signal on the page. */}
         <div className="flex items-center gap-3 rounded-lg border border-spotify/40 bg-spotify/10 px-5 py-4">
           <span aria-hidden className="relative flex h-2.5 w-2.5 shrink-0">

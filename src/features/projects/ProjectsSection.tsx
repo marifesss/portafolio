@@ -27,7 +27,7 @@ export function ProjectsSection() {
         variants={m.fadeSlideIn}
         initial="hidden"
         animate="visible"
-        className="bg-gradient-to-b from-spotify/25 to-transparent px-6 pb-8 pt-16 sm:px-10"
+        className="bg-gradient-to-b from-spotify/25 to-transparent px-gutter pb-8 pt-section"
       >
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-end">
           <div className="w-36 max-w-full shrink-0 sm:w-52">
