@@ -39,7 +39,11 @@ export function ScrollArea({
   const ref = useRef<HTMLElement>(null);
   return (
     <ScrollAreaContext.Provider value={ref}>
-      <main ref={ref} className={className}>
+      {/* `relative` is part of the contract, not styling the caller chose:
+          Framer Motion measures a `container` target against its offset parent
+          and warns when that container is statically positioned, which threw
+          the scroll-linked effects in Home and the device-flip gallery off. */}
+      <main ref={ref} className={`relative ${className ?? ""}`}>
         {children}
       </main>
     </ScrollAreaContext.Provider>

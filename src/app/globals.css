@@ -128,8 +128,12 @@ html {
      1600px, +1px by ~2100px. In rem (never px) so a raised browser default
      survives. */
   font-size: clamp(1rem, 0.8rem + 0.2vw, 1.0625rem);
-  /* Smooth in-page anchor jumps; neutralized under reduced-motion below. */
-  scroll-behavior: smooth;
+  /* No `scroll-behavior` here on purpose. The document never scrolls — AppShell
+     is `grid h-dvh` — so a smooth root scroller was dead weight that Next 16
+     flagged, since it no longer neutralizes it across route transitions and
+     wants `data-scroll-behavior="smooth"` to opt back in. The element that does
+     scroll, the content panel, carries `scroll-smooth` itself; the reduced-
+     motion block below still forces it back to `auto`. */
 }
 
 body {
