@@ -29,7 +29,7 @@ export function ProfileSection() {
           width={208}
           height={208}
           priority
-          className="h-44 w-44 shrink-0 rounded-full object-cover shadow-2xl ring-1 ring-black/20 sm:h-52 sm:w-52"
+          className="size-avatar shrink-0 rounded-full object-cover shadow-2xl ring-1 ring-black/20"
         />
         <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-widest text-muted">

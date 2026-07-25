@@ -1,6 +1,24 @@
 @import "tailwindcss";
 
 /**
+ * The unit every fluid size below ramps on.
+ *
+ * `1vw` alone is a bad proxy for "how big is this screen": a laptop panel at
+ * 150% OS scaling reports a 1493px-wide viewport but only ~770px of usable
+ * height, and a 2240x1400 screen is *wider* than it is tall by a lot more than
+ * the 16:9 the design was drawn against. Sizing purely on width hands a short
+ * window cinema-display type and pushes the fold up past the first paragraph.
+ *
+ * `min()` makes height the ceiling whenever the window is shorter than ~2:1,
+ * so a squat browser window scales down instead of only ever scaling sideways.
+ * On phones width always wins (1vw ≈ 3.9px vs 2vh ≈ 14px), so this is inert
+ * there — it only ever bites on wide-and-short desktop windows.
+ */
+:root {
+  --fluid: min(1vw, 2vh);
+}
+
+/**
  * Spotify-inspired design system.
  *
  * All colour, surface and gradient decisions live here. Tokens are registered
@@ -33,22 +51,26 @@
    *
    * These replace `text-4xl sm:text-6xl` pairs, which reached their largest
    * step at 640px and then never moved: a 1360px laptop panel and a 2560px
-   * monitor both got a 60px title, and on the laptop it swallowed the view.
-   * Each token ramps with the viewport between a phone floor and the size the
-   * design was drawn at (1920px), so the shell keeps the same proportions on
-   * any screen. The `rem` part keeps a reader's own font size in play. */
+   * monitor both got a 60px title. Each token now ramps continuously on
+   * `--fluid` between a phone floor and a cap for large monitors.
+   *
+   * Calibrated at a real 1493x770 laptop viewport (a 2240x1400 panel at 150%
+   * OS scaling) — the case that kept reading as oversized. The previous ramp
+   * was anchored to 1920 and gave that screen a 48px title and a 57px hero in
+   * a 1170px-wide column; these land at 38px and 44px. The `rem` term keeps a
+   * reader's own base font size in play. */
 
-  /* Page titles: sections, project detail, coming-soon. 36px → 60px */
-  --text-display: clamp(2.25rem, 0.33rem + 2.85vw, 3.75rem);
+  /* Page titles: sections, project detail, coming-soon. 28 → 38 → 48px */
+  --text-display: clamp(1.75rem, calc(1.525rem + 0.915 * var(--fluid)), 3rem);
   --text-display--line-height: 1.05;
-  /* The profile hero, one step above everything else. 48px → 72px */
-  --text-hero: clamp(3rem, 0.23rem + 3.56vw, 4.5rem);
+  /* The profile hero, one step above everything else. 32 → 44 → 56px */
+  --text-hero: clamp(2rem, calc(1.73rem + 1.111 * var(--fluid)), 3.5rem);
   --text-hero--line-height: 1.05;
-  /* Gallery chapter titles ("Web", "App móvil"). 30px → 48px */
-  --text-chapter: clamp(1.875rem, 0.44rem + 2.14vw, 3rem);
+  /* Gallery chapter titles ("Web", "App móvil"). 22 → 28 → 36px */
+  --text-chapter: clamp(1.375rem, calc(1.23rem + 0.588 * var(--fluid)), 2.25rem);
   --text-chapter--line-height: 1.1;
-  /* Sub-headings inside a section. 30px → 36px */
-  --text-heading: clamp(1.875rem, 0.97rem + 1.07vw, 2.25rem);
+  /* Sub-headings inside a section. 18 → 22 → 28px */
+  --text-heading: clamp(1.125rem, calc(1.115rem + 0.294 * var(--fluid)), 1.75rem);
   --text-heading--line-height: 1.15;
 
   /* Shell rhythm — also fluid, and vertical space keys off the window height,
@@ -58,6 +80,12 @@
    * `pt-section` / `px-gutter` / `pb-section`. */
   --spacing-section: clamp(1.5rem, 6vh, 5rem);
   --spacing-gutter: clamp(1.25rem, 3vw, 2.5rem);
+
+  /* The two pieces of oversized art that set each header's height. Fixed at
+     208px they ate 40% of a laptop panel's visible height before a word of
+     copy. `size-avatar` (profile) / `w-cover` (album-style project headers). */
+  --spacing-avatar: clamp(8rem, calc(9.5 * var(--fluid)), 13rem);
+  --spacing-cover: clamp(8.5rem, calc(11 * var(--fluid)), 13rem);
 }
 
 /* ---------------------------------------------------------------------------
@@ -93,11 +121,13 @@
 
 html {
   color-scheme: dark;
-  /* Base size ramps with the viewport: the reader's own default up to ~1370px,
-     growing to the Spotify-desktop 18px on a wide monitor. Everything sized in
-     rem — spacing, the sidebar, row heights — follows it. Expressed in rem
-     (never px) so a reader who raised their browser's default keeps it. */
-  font-size: clamp(1rem, 0.72rem + 0.33vw, 1.125rem);
+  /* Hold the reader's own base size through the whole laptop range and only
+     nudge it on a genuinely large monitor. The previous ramp started climbing
+     at ~1370px, which multiplied every rem-sized thing — spacing, the sidebar,
+     row heights — on top of the type already growing on its own. Flat to
+     1600px, +1px by ~2100px. In rem (never px) so a raised browser default
+     survives. */
+  font-size: clamp(1rem, 0.8rem + 0.2vw, 1.0625rem);
   /* Smooth in-page anchor jumps; neutralized under reduced-motion below. */
   scroll-behavior: smooth;
 }

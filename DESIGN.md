@@ -111,10 +111,23 @@ a ▶**. Header row is small, muted, uppercase-ish, with a bottom divider.
   `text-hero`, `text-chapter` and `text-heading` tokens (defined in
   `globals.css` `@theme`) instead of `text-4xl sm:text-6xl` pairs: those hit
   their largest step at 640px and then stop, so a 1360px laptop and a 2560px
-  monitor got the same title. The tokens ramp with the viewport between a
-  phone floor and the size the design was drawn at (1920px). The root
-  font-size ramps the same way, so everything sized in rem — spacing, the
-  sidebar, row heights — follows along.
+  monitor got the same title.
+- Everything fluid ramps on **`--fluid`, which is `min(1vw, 2vh)`** — not on
+  `vw`. Width alone lies about how much room there is: a 2240×1400 laptop at
+  150% OS scaling reports a 1493px-wide viewport with only ~770px of height,
+  and sizing on width hands that window desktop-monitor type while pushing the
+  fold above the first paragraph. `min()` lets height cap the scale whenever
+  the window is shorter than ~2:1. On phones width always wins, so it is inert
+  there.
+- The **reference viewport is 1493×770**, not 1920: a page title lands at
+  38px there, 43px at 1920, 49px at 2560, 28px on a phone. Same idea for
+  layout — the sidebar is `clamp(13.5rem, 17vw, 20rem)` (Spotify's own ~17%
+  share) and the two oversized header images use the `size-avatar` /
+  `w-cover` spacing tokens instead of fixed `sm:w-52`, which alone ate 40% of
+  a laptop panel's height.
+- The **root font-size stays flat** through the whole laptop range (16px to
+  1600px, +1px by ~2100px). It used to ramp from ~1370px, which multiplied
+  every rem-sized thing on top of the type already growing on its own.
 - Motion is **rich but restrained**: hover highlights, card lift, staggered
   entrances, section fade/slide, animated equalizer. Respect
   `prefers-reduced-motion`.

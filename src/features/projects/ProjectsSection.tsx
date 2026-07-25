@@ -30,7 +30,7 @@ export function ProjectsSection() {
         className="bg-gradient-to-b from-spotify/25 to-transparent px-gutter pb-8 pt-section"
       >
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-end">
-          <div className="w-36 max-w-full shrink-0 sm:w-52">
+          <div className="w-cover max-w-full shrink-0">
             {PLAYLIST_COVER ? (
               <div
                 role="img"

@@ -21,9 +21,10 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="grid h-dvh grid-rows-[1fr_auto_auto] bg-black text-white">
       {/* Sidebar + main float on the black frame with ~8px gutters. The sidebar
           tracks the viewport rather than stepping at two breakpoints — pinned
-          at 21rem it ate a quarter of a laptop screen — growing toward
-          Spotify's ~340px on a wide monitor. Main takes the rest. */}
-      <div className="grid min-h-0 grid-cols-1 gap-2 p-2 md:grid-cols-[clamp(15rem,20vw,21rem)_1fr]">
+          at 21rem it ate a quarter of a laptop screen. 17vw keeps it near
+          Spotify's own ~17% share (≈254px on a 1493px laptop panel) instead of
+          the 20% that left the content column cramped. Main takes the rest. */}
+      <div className="grid min-h-0 grid-cols-1 gap-2 p-2 md:grid-cols-[clamp(13.5rem,17vw,20rem)_1fr]">
         <aside className="hidden min-h-0 overflow-hidden rounded-lg bg-base md:block">
           <Sidebar />
         </aside>
