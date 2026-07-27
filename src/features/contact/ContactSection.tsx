@@ -44,9 +44,6 @@ export function ContactSection() {
                   })}
                   className="flex min-h-14 items-center gap-4 rounded-lg bg-white/5 p-4 outline-none transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-spotify"
                 >
-                  <span aria-hidden className="text-xl">
-                    {channel.icon}
-                  </span>
                   <span className="min-w-0 truncate font-semibold text-white">
                     {channel.label}
                   </span>
