@@ -225,21 +225,13 @@ export function HomeSection() {
                     <motion.li key={`${category}-${item}`} variants={m.staggerItem}>
                       <Link
                         href="/skills"
-                        className="flex items-center gap-4 rounded-md p-2 outline-none transition-colors hover:bg-white/10 focus-visible:bg-white/10"
+                        className="block rounded-md p-2 outline-none transition-colors hover:bg-white/10 focus-visible:bg-white/10"
                       >
-                        <span
-                          aria-hidden
-                          className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-white/5 text-lg"
-                        >
-                          🎧
+                        <span className="block truncate font-semibold text-white">
+                          {item}
                         </span>
-                        <span className="min-w-0">
-                          <span className="block truncate font-semibold text-white">
-                            {item}
-                          </span>
-                          <span className="block truncate text-sm text-muted">
-                            {category}
-                          </span>
+                        <span className="block truncate text-sm text-muted">
+                          {category}
                         </span>
                       </Link>
                     </motion.li>
@@ -263,17 +255,9 @@ export function HomeSection() {
                     <motion.li key={item.id} variants={m.staggerItem}>
                       <Link
                         href={item.href}
-                        className="flex items-center gap-4 rounded-md p-2 outline-none transition-colors hover:bg-white/10 focus-visible:bg-white/10"
+                        className="block truncate rounded-md p-2 font-semibold text-white outline-none transition-colors hover:bg-white/10 focus-visible:bg-white/10"
                       >
-                        <span
-                          aria-hidden
-                          className="grid h-12 w-12 shrink-0 place-items-center rounded-md bg-white/5 text-lg"
-                        >
-                          {item.icon}
-                        </span>
-                        <span className="truncate font-semibold text-white">
-                          {pick(item.label)}
-                        </span>
+                        {pick(item.label)}
                       </Link>
                     </motion.li>
                   ))}
