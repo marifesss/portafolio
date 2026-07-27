@@ -22,7 +22,7 @@ export const featuredSlugs = ["yelou", "arrowmaze", "partela"] as const;
 export const home = {
   /** Subtle "open to work" signal shown in the hero. */
   availability: {
-    es: "Disponible para pasantías",
-    en: "Available for internships",
+    es: "Disponible para nuevas oportunidades",
+    en: "Available for new opportunities",
   } satisfies Localized,
 } as const;
