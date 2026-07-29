@@ -10,7 +10,7 @@ export const navigation: NavItem[] = [
   {
     id: "home",
     href: "/",
-    icon: "🏠",
+    icon: "🏠 ",
     label: { es: "Inicio", en: "Home" },
     cover: "/images/covers/cover3.jpeg",
   },
