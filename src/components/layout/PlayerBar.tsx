@@ -1,32 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { site } from "@/content/site";
+import { tracks } from "@/content/music";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
-/** Fake track length driving the (silent, decorative) progress + timestamps. */
-const TRACK_SECONDS = 214; // 3:34
-/** How often the progress ticks, and how much "track time" each tick adds. */
-const TICK_MS = 250;
-const TICK_SECONDS = TICK_MS / 1000;
-
 function formatTime(totalSeconds: number) {
-  const s = Math.max(0, Math.floor(totalSeconds));
+  const s = Math.max(0, Math.floor(totalSeconds || 0));
   return `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
-}
-
-/** Tracks the OS "reduce motion" setting, SSR-safely (starts `false`). */
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduced(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-  return reduced;
 }
 
 /* ── Crisp line icons (Spotify's control set), sized in `em` so they scale with
@@ -81,14 +62,6 @@ function PauseGlyph() {
   );
 }
 
-function HeartIcon() {
-  return (
-    <svg viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden>
-      <path d="M8 14.25 1.75 8A3.5 3.5 0 0 1 6.7 3.05L8 4.35l1.3-1.3A3.5 3.5 0 0 1 14.25 8L8 14.25zM6.7 4.11 2.81 8A2 2 0 0 0 8 12.19l5.19-4.08A2 2 0 0 0 9.3 4.11L8 5.41 6.7 4.11z" />
-    </svg>
-  );
-}
-
 function VolumeIcon() {
   return (
     <svg viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden>
@@ -98,7 +71,16 @@ function VolumeIcon() {
   );
 }
 
-/** White circular play/pause toggle. The one control that actually does something. */
+function MutedIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" aria-hidden>
+      <path d="M9.741.85a.75.75 0 0 1 .375.65v13a.75.75 0 0 1-1.125.65l-6.925-4a3.642 3.642 0 0 1-1.33-4.967 3.639 3.639 0 0 1 1.33-1.332l6.925-4a.75.75 0 0 1 .75 0zm-6.924 5.3a2.139 2.139 0 0 0 0 3.7l5.8 3.35V2.8l-5.8 3.35z" />
+      <path d="M13.86 5.47a.75.75 0 0 0-1.061 0l-1.47 1.47-1.47-1.47A.75.75 0 0 0 8.8 6.53L10.269 8l-1.47 1.47a.75.75 0 1 0 1.06 1.06l1.47-1.47 1.47 1.47a.75.75 0 0 0 1.06-1.06L12.39 8l1.47-1.47a.75.75 0 0 0 0-1.06z" />
+    </svg>
+  );
+}
+
+/** White circular play/pause toggle. */
 function PlayToggle({
   isPlaying,
   onToggle,
@@ -124,11 +106,12 @@ function PlayToggle({
 function ControlButton({
   onClick,
   label,
-  active = false,
+  active,
   children,
 }: {
-  onClick?: () => void;
+  onClick: () => void;
   label: string;
+  /** Toggle controls (shuffle / repeat) report their on/off state. */
   active?: boolean;
   children: React.ReactNode;
 }) {
@@ -137,8 +120,11 @@ function ControlButton({
       type="button"
       onClick={onClick}
       aria-label={label}
+      aria-pressed={active}
       className={`grid place-items-center rounded-full p-1 text-[18px] outline-none transition hover:scale-110 focus-visible:ring-2 focus-visible:ring-spotify ${
-        active ? "text-spotify hover:text-spotify-bright" : "text-muted hover:text-white"
+        active
+          ? "text-spotify hover:text-spotify-bright"
+          : "text-muted hover:text-white"
       }`}
     >
       {children}
@@ -146,137 +132,293 @@ function ControlButton({
   );
 }
 
-/** Decorative progress track with a fill and a hover-revealed scrubber knob. */
-function ProgressBar({ pct }: { pct: number }) {
+/**
+ * Spotify-style horizontal slider (progress / volume): a thin track that turns
+ * green on hover, with a knob that appears on hover or focus. Pointer drag and
+ * keyboard arrows both work; `value` and `onChange` are fractions in [0, 1].
+ */
+function Slider({
+  value,
+  onChange,
+  label,
+  valueText,
+  step = 0.05,
+  className = "",
+}: {
+  value: number;
+  onChange: (fraction: number) => void;
+  label: string;
+  valueText: string;
+  step?: number;
+  className?: string;
+}) {
+  const pct = Math.min(100, Math.max(0, value * 100));
+
+  const fromPointer = (el: HTMLElement, clientX: number) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.width === 0) return;
+    onChange(Math.min(1, Math.max(0, (clientX - rect.left) / rect.width)));
+  };
+
   return (
     <div
-      aria-hidden
-      className="group/track relative h-1 w-full rounded-full bg-white/25"
+      role="slider"
+      tabIndex={0}
+      aria-label={label}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={Math.round(pct)}
+      aria-valuetext={valueText}
+      onPointerDown={(e) => {
+        e.currentTarget.setPointerCapture(e.pointerId);
+        fromPointer(e.currentTarget, e.clientX);
+      }}
+      onPointerMove={(e) => {
+        if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+          fromPointer(e.currentTarget, e.clientX);
+        }
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowRight" || e.key === "ArrowUp") {
+          e.preventDefault();
+          onChange(Math.min(1, value + step));
+        } else if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
+          e.preventDefault();
+          onChange(Math.max(0, value - step));
+        }
+      }}
+      className={`group/track relative flex h-3 cursor-pointer touch-none items-center outline-none focus-visible:ring-2 focus-visible:ring-spotify ${className}`}
     >
-      <div
-        className="h-full rounded-full bg-white transition-colors group-hover/track:bg-spotify"
-        style={{ width: `${pct}%` }}
-      />
-      <span
-        className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white opacity-0 shadow transition-opacity group-hover/track:opacity-100"
-        style={{ left: `${pct}%` }}
-      />
+      <div className="relative h-1 w-full rounded-full bg-white/25">
+        <div
+          className="h-full rounded-full bg-white transition-colors group-hover/track:bg-spotify"
+          style={{ width: `${pct}%` }}
+        />
+        <span
+          className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white opacity-0 shadow transition-opacity group-hover/track:opacity-100 group-focus-visible/track:opacity-100"
+          style={{ left: `${pct}%` }}
+        />
+      </div>
     </div>
   );
 }
 
 /**
- * The bottom "now playing" bar (DESIGN.md §8): animated but **silent** — no
- * audio is ever loaded. Play/pause toggles a decorative progress bar; prev/
- * next/shuffle/repeat and the volume slider are decorative. The "album art" is
- * Mariana's profile photo. Reduced-motion users get a static, legible bar.
+ * The bottom "now playing" bar (DESIGN.md §8), playing "Favs de mari": Apple's
+ * official 30-second previews, streamed from Apple and credited with a link to
+ * each song on Apple Music. Silent until the visitor presses play. Every
+ * control works: play/pause, previous/next, shuffle, repeat, seek, volume.
  */
 export function PlayerBar() {
-  const { pick, t } = useLanguage();
-  const reducedMotion = usePrefersReducedMotion();
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [elapsed, setElapsed] = useState(0);
-  const [liked, setLiked] = useState(true);
+  const { t } = useLanguage();
+  const audioRef = useRef<HTMLAudioElement>(null);
+  /** Whether the next track change should start playing right away. */
+  const autoplayNext = useRef(false);
 
-  // Auto-advance the fake progress while "playing". Skipped for reduced-motion
-  // users, who keep a static bar. Loops back to the start at the end.
+  const [index, setIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [position, setPosition] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [shuffle, setShuffle] = useState(false);
+  const [repeat, setRepeat] = useState(true);
+  const [volume, setVolume] = useState(0.7);
+  const [muted, setMuted] = useState(false);
+
+  const track = tracks[index];
+
+  // Keep the element's volume in sync with the slider / mute toggle.
   useEffect(() => {
-    if (!isPlaying || reducedMotion) return;
-    const id = window.setInterval(() => {
-      setElapsed((e) => (e + TICK_SECONDS >= TRACK_SECONDS ? 0 : e + TICK_SECONDS));
-    }, TICK_MS);
-    return () => window.clearInterval(id);
-  }, [isPlaying, reducedMotion]);
+    if (audioRef.current) audioRef.current.volume = muted ? 0 : volume;
+  }, [volume, muted]);
 
-  const pct = (elapsed / TRACK_SECONDS) * 100;
-  const toggle = () => setIsPlaying((p) => !p);
+  // A new track: start it if playback was running or the visitor skipped.
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio || !autoplayNext.current) return;
+    autoplayNext.current = false;
+    audio.play().catch(() => {});
+  }, [index]);
+
+  const goTo = (target: number, play: boolean) => {
+    autoplayNext.current = play;
+    setPosition(0);
+    setDuration(0);
+    setIndex(target);
+  };
+
+  const nextIndex = () => {
+    if (shuffle && tracks.length > 1) {
+      let i = index;
+      while (i === index) i = Math.floor(Math.random() * tracks.length);
+      return i;
+    }
+    return (index + 1) % tracks.length;
+  };
+
+  const togglePlay = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (audio.paused) audio.play().catch(() => {});
+    else audio.pause();
+  };
+
+  const next = () => goTo(nextIndex(), true);
+
+  const previous = () => {
+    const audio = audioRef.current;
+    // Like Spotify: a few seconds in, "previous" restarts the current song.
+    if (audio && audio.currentTime > 3) {
+      audio.currentTime = 0;
+      return;
+    }
+    goTo((index - 1 + tracks.length) % tracks.length, true);
+  };
+
+  const onEnded = () => {
+    const last = !shuffle && index === tracks.length - 1;
+    if (last && !repeat) goTo(0, false);
+    else goTo(nextIndex(), true);
+  };
+
+  const seek = (fraction: number) => {
+    const audio = audioRef.current;
+    if (!audio || !duration) return;
+    audio.currentTime = fraction * duration;
+    setPosition(audio.currentTime);
+  };
+
+  const progress = duration > 0 ? position / duration : 0;
   const toggleLabel = isPlaying ? t.pause : t.play;
+  const timeText = `${formatTime(position)} / ${formatTime(duration)}`;
+  const level = muted ? 0 : volume;
 
   return (
     <footer className="border-t border-white/5 bg-base">
+      <audio
+        ref={audioRef}
+        src={track.preview}
+        preload="none"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        onTimeUpdate={(e) => setPosition(e.currentTarget.currentTime)}
+        onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+        onEnded={onEnded}
+      />
+
       <div className="grid grid-cols-[1fr_auto] items-center gap-3 px-4 py-2.5 md:grid-cols-3 md:gap-6 md:px-6 md:py-3">
-        {/* Left — the "track" that is now playing. */}
+        {/* Left: the song that's playing, credited to Apple Music. */}
         <div className="flex min-w-0 items-center gap-3">
           <Image
-            src="/images/mariana/perfil.jpeg"
-            alt={site.name}
+            src={track.artwork}
+            alt=""
             width={56}
             height={56}
             className="h-11 w-11 shrink-0 rounded-md object-cover shadow-lg ring-1 ring-black/30 md:h-14 md:w-14"
           />
           <div className="min-w-0">
             <p className="truncate text-[15px] font-semibold leading-tight text-white">
-              {pick(site.nowPlaying)}
+              {track.title}
             </p>
-            <p className="truncate text-[13px] text-muted">{site.name}</p>
+            <p className="truncate text-[13px] text-muted">
+              {track.artist}
+              {" · "}
+              <a
+                href={track.appleMusicUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline-offset-2 transition-colors hover:text-white hover:underline"
+              >
+                {t.listenOnAppleMusic}
+              </a>
+            </p>
           </div>
-          <button
-            type="button"
-            onClick={() => setLiked((v) => !v)}
-            aria-pressed={liked}
-            aria-label={t.like}
-            className={`ml-1 hidden shrink-0 rounded-full p-1 text-base outline-none transition hover:scale-110 focus-visible:ring-2 focus-visible:ring-spotify sm:block ${
-              liked ? "text-spotify" : "text-muted hover:text-white"
-            }`}
-          >
-            <HeartIcon />
-          </button>
         </div>
 
-        {/* Center — control cluster + progress (desktop). Widened + centered. */}
-        <div className="hidden flex-col items-center gap-2.5 md:flex">
+        {/* Center: transport controls + progress (desktop). */}
+        <div className="hidden flex-col items-center gap-2 md:flex">
           <div className="flex items-center gap-7">
-            <ControlButton label="Shuffle">
+            <ControlButton
+              label={t.shuffle}
+              active={shuffle}
+              onClick={() => setShuffle((v) => !v)}
+            >
               <ShuffleIcon />
             </ControlButton>
-            <ControlButton label="Previous">
+            <ControlButton label={t.previous} onClick={previous}>
               <PrevIcon />
             </ControlButton>
-            <PlayToggle isPlaying={isPlaying} onToggle={toggle} label={toggleLabel} />
-            <ControlButton label="Next">
+            <PlayToggle
+              isPlaying={isPlaying}
+              onToggle={togglePlay}
+              label={toggleLabel}
+            />
+            <ControlButton label={t.next} onClick={next}>
               <NextIcon />
             </ControlButton>
-            <ControlButton label="Repeat">
+            <ControlButton
+              label={t.repeat}
+              active={repeat}
+              onClick={() => setRepeat((v) => !v)}
+            >
               <RepeatIcon />
             </ControlButton>
           </div>
           <div className="flex w-full max-w-[42rem] items-center gap-3 text-xs tabular-nums text-faint">
-            <span>{formatTime(elapsed)}</span>
-            <ProgressBar pct={pct} />
-            <span>{formatTime(TRACK_SECONDS)}</span>
+            <span>{formatTime(position)}</span>
+            <Slider
+              value={progress}
+              onChange={seek}
+              label={t.seek}
+              valueText={timeText}
+              className="flex-1"
+            />
+            <span title={t.previewNote}>{formatTime(duration)}</span>
           </div>
         </div>
 
-        {/* Right — mobile play button + decorative desktop volume. */}
+        {/* Right: mobile controls / desktop volume. */}
         <div className="flex items-center justify-end gap-3">
-          <div className="md:hidden">
-            <PlayToggle isPlaying={isPlaying} onToggle={toggle} label={toggleLabel} />
+          <div className="flex items-center gap-4 md:hidden">
+            <PlayToggle
+              isPlaying={isPlaying}
+              onToggle={togglePlay}
+              label={toggleLabel}
+            />
+            <ControlButton label={t.next} onClick={next}>
+              <NextIcon />
+            </ControlButton>
           </div>
           <div className="hidden items-center justify-end gap-2.5 text-muted md:flex">
             <button
               type="button"
-              aria-label="Volume"
+              onClick={() => setMuted((m) => !m)}
+              aria-label={muted ? t.unmute : t.mute}
               className="shrink-0 p-1 text-lg outline-none transition hover:text-white focus-visible:ring-2 focus-visible:ring-spotify"
             >
-              <VolumeIcon />
+              {level === 0 ? <MutedIcon /> : <VolumeIcon />}
             </button>
-            <div
-              aria-hidden
-              className="group/vol relative h-1 w-28 rounded-full bg-white/25"
-            >
-              <div className="h-full w-2/3 rounded-full bg-white transition-colors group-hover/vol:bg-spotify" />
-              <span
-                className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white opacity-0 shadow transition-opacity group-hover/vol:opacity-100"
-                style={{ left: "66.6667%" }}
-              />
-            </div>
+            <Slider
+              value={level}
+              onChange={(v) => {
+                setVolume(v);
+                setMuted(false);
+              }}
+              label={t.volume}
+              valueText={`${Math.round(level * 100)}%`}
+              className="w-28"
+            />
           </div>
         </div>
       </div>
 
-      {/* Mobile progress bar — spans the full width below the compact row. */}
+      {/* Mobile progress bar, full width below the compact row. */}
       <div className="px-4 pb-2 md:hidden">
-        <ProgressBar pct={pct} />
+        <Slider
+          value={progress}
+          onChange={seek}
+          label={t.seek}
+          valueText={timeText}
+        />
       </div>
     </footer>
   );
