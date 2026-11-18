@@ -28,5 +28,10 @@ export const profile = {
       image: "/images/covers/genero2.jpeg",
     },
     { name: "Fintech", glyph: "💳", image: "/images/covers/genero3.jpeg" },
+    {
+      name: "Product Management",
+      glyph: "🧭",
+      image: "/images/covers/discoPM.jpeg",
+    },
   ],
 } as const;

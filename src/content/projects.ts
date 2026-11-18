@@ -10,16 +10,16 @@ export const projects: Project[] = [
     title: "Aló Mamá",
     cover: "/images/AloMama/alo-mama-cd.png",
     role: {
-      es: "Desarrolladora de la app Android y la voz de IA",
-      en: "Android app & AI voice developer",
+      es: "Co-founder y desarrolladora de la app Android y la voz de IA",
+      en: "Co-founder & Android app and AI voice developer",
     },
     meta: {
       es: "Platanus Hack 26: Caracas · 1er lugar en Emergencias · 2do general",
       en: "Platanus Hack 26: Caracas · 1st in Emergencies · 2nd overall",
     },
     description: {
-      es: "Aló Mamá es una app Android para pedir ayuda en secreto durante un secuestro o un robo. Presionas volumen arriba-abajo-arriba, aunque el teléfono esté bloqueado, y en menos de 15 segundos te llama \"Mamá\": un agente de voz con IA que te saluda por tu nombre. Un detector de coacción revisa la llamada y, si estás en peligro, tu familia recibe un WhatsApp con tu ubicación, el veredicto y la ficha del caso. Para quien te esté mirando, es solo una llamada normal con tu mamá.\n\nLo construimos en 36 horas en Platanus Hack 26: Caracas, en un equipo de cinco. Ganamos el 1er lugar del track de Emergencias y quedamos 2dos en la clasificación general entre 22 equipos. Me encargué del disparo desde el teléfono con la pantalla bloqueada, la configuración de la app, la voz de \"Mamá\" (guion y clonación) y el pitch.",
-      en: "Aló Mamá is an Android app for asking for help in secret during a kidnapping or a robbery. You press volume up-down-up, even with the phone locked, and within 15 seconds \"Mom\" calls you: an AI voice agent that greets you by name. A duress detector reviews the call and, if you're in danger, your family gets a WhatsApp message with your location, the verdict, and the case file. To anyone watching, it's just a normal call with your mom.\n\nWe built it in 36 hours at Platanus Hack 26: Caracas, as a team of five. We won 1st place in the Emergencies track and finished 2nd overall out of 22 teams. I owned the phone trigger with the screen locked, the app setup, Mom's voice (script and cloning), and the pitch.",
+      es: "Aló Mamá es una app Android para pedir ayuda en secreto durante un secuestro o un robo. Presionas volumen arriba-abajo-arriba, aunque el teléfono esté bloqueado, y en menos de 15 segundos te llama \"Mamá\": un agente de voz con IA que te saluda por tu nombre. Un detector de coacción revisa la llamada y, si estás en peligro, tu familia recibe un WhatsApp con tu ubicación, el veredicto y la ficha del caso. Para quien te esté mirando, es solo una llamada normal con tu mamá.\n\nLo construimos en 36 horas en Platanus Hack 26: Caracas, en un equipo de cinco. Ganamos el 1er lugar del track de Emergencias y quedamos 2dos en la clasificación general entre 22 equipos. Como co-founder, me encargué del disparo desde el teléfono con la pantalla bloqueada, la configuración de la app, la voz de \"Mamá\" (guion y clonación) y el pitch.",
+      en: "Aló Mamá is an Android app for asking for help in secret during a kidnapping or a robbery. You press volume up-down-up, even with the phone locked, and within 15 seconds \"Mom\" calls you: an AI voice agent that greets you by name. A duress detector reviews the call and, if you're in danger, your family gets a WhatsApp message with your location, the verdict, and the case file. To anyone watching, it's just a normal call with your mom.\n\nWe built it in 36 hours at Platanus Hack 26: Caracas, as a team of five. We won 1st place in the Emergencies track and finished 2nd overall out of 22 teams. As a co-founder, I owned the phone trigger with the screen locked, the app setup, Mom's voice (script and cloning), and the pitch.",
     },
     stackGroups: [
       {
