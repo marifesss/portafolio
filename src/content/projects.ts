@@ -63,6 +63,18 @@ export const projects: Project[] = [
         en: "Aló Mamá is two pieces that talk through a shared contract: a native Android app and a Go server.\n\nThe app is built in Kotlin with Jetpack Compose and Material 3. The trigger is a volume pattern (up-down-up) that works even with the phone locked thanks to an accessibility service; once it fires, the app sends the GPS location to the server. During setup it saves \"Mom\" to the contacts, along with the alert phrase and the all-good phrase.\n\nThe server is written in Go using only net/http, on top of Postgres and deployed on Render. It's split into modules with one responsibility each: receiving the alert and choosing the path, the call engine, the duress detector, the verdict, the WhatsApp notice, and the case file with its web dashboard.\n\nThe call is placed by an ElevenLabs voice agent over Twilio, with a cloned voice. When it ends, a webhook returns the conversation and the detector evaluates it with rules and, when configured, with Claude: the alert phrase or silence means danger, the all-good phrase alerts no one, and anything else alerts anyway. To measure it, we built a set of 70 labeled dialogues.\n\nThe family gets the alert on WhatsApp through Kapso, and a web dashboard shows every alert live, with its route on the map and the full case file once the call ends.",
       },
     },
+    media: [
+      {
+        type: "video",
+        src: "/images/AloMama/demo.mp4",
+        poster: "/images/AloMama/posters/demo.webp",
+        platform: "web",
+        caption: {
+          es: "Demo: de la alerta en la central al WhatsApp de la familia",
+          en: "Demo: from the dashboard alert to the family's WhatsApp",
+        },
+      },
+    ],
   },
   {
     // Pre-launch: the detail view renders the spoiler-free coming-soon layout
