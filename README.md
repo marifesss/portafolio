@@ -5,7 +5,7 @@ sección es una "playlist" y cada proyecto, una "pista". Bilingüe (ES/EN) y
 pensado para mostrar mis proyectos como developer con foco en arquitectura
 de software.
 
-🔗 **Live:** [marianafes.vercel.app](https://marianafes.vercel.app)
+🔗 **Live:** [marianafes.com](https://marianafes.com)
 
 ## Stack
 

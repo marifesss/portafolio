@@ -5,7 +5,7 @@ export const site = {
   name: "Mariana Fes",
   /** Host the site is served from; backs `metadataBase` in the root layout, and
    *  shown in the sidebar footer. Change it here and both follow. */
-  domain: "marianafes.vercel.app",
+  domain: "marianafes.com",
 
   /** Long tagline (hero). */
   tagline: {
