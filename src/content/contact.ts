@@ -12,11 +12,6 @@ export const contactChannels: ContactChannel[] = [
     href: "mailto:marianafes15@gmail.com",
   },
   {
-    id: "phone",
-    label: "+58 422-634-0289",
-    href: "tel:+584226340289",
-  },
-  {
     id: "linkedin",
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/fesmariana",

@@ -115,7 +115,7 @@ The whole site is framed as a music player (Spotify):
 
 ### 5.7 Contacto
 - "¿Conectamos?" / "Let's connect".
-- Email (**marianafes15@gmail.com**), phone, LinkedIn, GitHub — as tappable
+- Email (**marianafes15@gmail.com**), LinkedIn, GitHub — as tappable
   cards/links; email via `mailto:`.
 
 ### 5.8 Buscar (Search) — cross-cutting feature
