@@ -11,7 +11,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { site } from "@/content/site";
-import { greetings, featuredSlugs, home, type Daypart } from "@/content/home";
+import { greetings, featuredSlugs, type Daypart } from "@/content/home";
 import { getProjectBySlug, projects } from "@/content/projects";
 import { skills } from "@/content/skills";
 import { navigation } from "@/content/navigation";
@@ -278,15 +278,6 @@ export function HomeSection() {
           <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted sm:text-xl">
             {pick(site.tagline)}
           </p>
-
-          {/* Availability signal — tasteful green "open to work" pill. */}
-          <span className="mt-6 inline-flex items-center gap-2 rounded-full border border-spotify/40 bg-spotify/10 px-4 py-1.5 text-sm font-semibold text-spotify">
-            <span aria-hidden className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-spotify opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-spotify" />
-            </span>
-            {pick(home.availability)}
-          </span>
 
           {/* Featured projects — quick-access cards into the strongest work. */}
           <h2 className="mb-4 mt-12 text-2xl font-bold tracking-tight">

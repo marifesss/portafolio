@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { contactChannels, contactHeading } from "@/content/contact";
-import { home } from "@/content/home";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { useSectionMotion } from "@/components/motion/SectionTransition";
 import { useLanguage } from "@/i18n/LanguageProvider";
@@ -17,17 +16,8 @@ export function ContactSection() {
       <SectionHeader eyebrow={t.contactEyebrow} title={pick(contactHeading)} />
 
       <div className="px-gutter pb-section sm:max-w-lg">
-        {/* Reinforce the "open to work" signal right at the point of contact. */}
-        <span className="inline-flex items-center gap-2 rounded-full border border-spotify/40 bg-spotify/10 px-4 py-1.5 text-sm font-semibold text-spotify">
-          <span aria-hidden className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-spotify opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-spotify" />
-          </span>
-          {pick(home.availability)}
-        </span>
-
         <motion.ul
-          className="mt-6 grid gap-3"
+          className="grid gap-3"
           variants={m.staggerContainer}
           initial="hidden"
           animate="visible"

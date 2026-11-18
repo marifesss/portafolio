@@ -6,8 +6,8 @@ export const experience: Experience[] = [
     company: "Mondelēz International Venezuela",
     cover: "/images/mondelez/mondelez-introduced.avif",
     tenure: {
-      es: "Agosto 2025 — presente",
-      en: "August 2025 — present",
+      es: "Agosto 2025 - presente",
+      en: "August 2025 - present",
     },
     roles: [
       {
@@ -16,8 +16,8 @@ export const experience: Experience[] = [
           en: "Commercial Projects Analyst",
         },
         period: {
-          es: "Agosto 2026 — presente",
-          en: "August 2026 — present",
+          es: "Agosto 2026 - presente",
+          en: "August 2026 - present",
         },
         description: {
           es: "Desde agosto de 2026 soy Analista de Proyectos Comerciales en Mondelēz Venezuela, un rol con enfoque de product manager: evalúo los requisitos y requerimientos de las distintas áreas del negocio y, a partir de ellos, defino y llevo a cabo los proyectos necesarios para optimizar los procesos dentro de la compañía.",
@@ -32,8 +32,8 @@ export const experience: Experience[] = [
         },
         period: {
           // TODO: confirm the internship end month (assumed July 2026, right before the analyst role).
-          es: "Agosto 2025 — Julio 2026",
-          en: "August 2025 — July 2026",
+          es: "Agosto 2025 - Julio 2026",
+          en: "August 2025 - July 2026",
         },
         scope: {
           es: "Todas las regiones de Venezuela",
