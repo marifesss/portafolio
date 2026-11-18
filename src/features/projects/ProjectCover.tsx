@@ -38,7 +38,6 @@ export function ProjectCover({
       <AlbumArtPlaceholder
         size={size}
         fill={fill}
-        glyph={project.comingSoon ? "🔒" : "🎵"}
         hue={hueFor(project.slug)}
         label={label}
       />

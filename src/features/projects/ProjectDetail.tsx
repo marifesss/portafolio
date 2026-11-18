@@ -5,6 +5,11 @@ import { useState } from "react";
 import type { Project } from "@/lib/types";
 import { Chip } from "@/components/ui/Chip";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import {
+  ArrowLeftIcon,
+  ArrowUpRightIcon,
+  LockIcon,
+} from "@/components/ui/icons";
 import { ProjectGallery } from "@/features/projects/ProjectGallery";
 import { ComingSoonDetail } from "@/features/projects/ComingSoonDetail";
 import { ProjectCover } from "@/features/projects/ProjectCover";
@@ -56,7 +61,12 @@ export function ProjectDetail({ project }: { project: Project }) {
       <header className="bg-gradient-to-b from-spotify/25 to-transparent px-gutter pb-8 pt-section">
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-end">
           <div className="w-cover max-w-full shrink-0">
-            <ProjectCover priority fill project={project} label={project.title} />
+            <ProjectCover
+              priority
+              fill
+              project={project}
+              label={project.title}
+            />
           </div>
 
           <div className="text-center sm:text-left">
@@ -76,9 +86,10 @@ export function ProjectDetail({ project }: { project: Project }) {
       <div className="space-y-8 px-gutter pb-section">
         <Link
           href="/proyectos"
-          className="inline-flex text-sm text-muted transition-colors hover:text-white"
+          className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-white"
         >
-          ← {t.backToProjects}
+          <ArrowLeftIcon />
+          {t.backToProjects}
         </Link>
 
         {/* Tabs — only when there's a "Cómo se hizo" story to switch to. */}
@@ -137,15 +148,17 @@ export function ProjectDetail({ project }: { project: Project }) {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-full border border-white/15 px-4 py-2 text-sm text-white transition-colors hover:border-spotify hover:text-spotify"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-4 py-2 text-sm text-white transition-colors hover:border-spotify hover:text-spotify"
                     >
-                      {pick(link.label)} ↗
+                      {pick(link.label)}
+                      <ArrowUpRightIcon />
                     </a>
                   </li>
                 ))}
                 {project.privateCode && (
-                  <li className="rounded-full border border-dashed border-white/15 px-4 py-2 text-sm text-faint">
-                    🔒 {t.privateCode}
+                  <li className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-white/15 px-4 py-2 text-sm text-faint">
+                    <LockIcon />
+                    {t.privateCode}
                   </li>
                 )}
               </ul>
@@ -208,7 +221,6 @@ export function ProjectDetail({ project }: { project: Project }) {
                 />
               </div>
             )}
-
           </div>
         ) : (
           project.making && (
@@ -239,7 +251,8 @@ export function ProjectDetail({ project }: { project: Project }) {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-spotify hover:text-spotify"
                   >
-                    {t.viewDiagrams} ↗
+                    {t.viewDiagrams}
+                    <ArrowUpRightIcon />
                   </a>
                 </div>
               )}

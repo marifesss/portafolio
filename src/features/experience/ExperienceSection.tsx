@@ -55,7 +55,6 @@ export function ExperienceSection() {
                 ) : (
                   <AlbumArtPlaceholder
                     fill
-                    glyph="🍫"
                     hue={285}
                     label={job.company}
                   />

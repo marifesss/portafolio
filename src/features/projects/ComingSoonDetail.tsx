@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Project } from "@/lib/types";
 import { Chip } from "@/components/ui/Chip";
 import { Badge } from "@/components/ui/Badge";
+import { ArrowLeftIcon } from "@/components/ui/icons";
 import { ProjectCover } from "@/features/projects/ProjectCover";
 import { NotifyForm } from "@/features/projects/NotifyForm";
 import { useLanguage } from "@/i18n/LanguageProvider";
@@ -57,9 +58,10 @@ export function ComingSoonDetail({ project }: { project: Project }) {
       <div className="space-y-8 px-gutter pb-section">
         <Link
           href="/proyectos"
-          className="inline-flex text-sm text-muted transition-colors hover:text-white"
+          className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-white"
         >
-          ← {t.backToProjects}
+          <ArrowLeftIcon />
+          {t.backToProjects}
         </Link>
 
         {/* Mysterious teaser — no product spoilers. */}

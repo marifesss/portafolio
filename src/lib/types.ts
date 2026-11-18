@@ -25,8 +25,6 @@ export interface NavItem {
   href: string;
   /** Sidebar label per language. */
   label: Localized;
-  /** Emoji/glyph used as a lightweight icon (mobile tabs, fallback tile). */
-  icon: string;
   /** Optional cover art path in /public shown as the sidebar row thumbnail. */
   cover?: string;
 }
@@ -168,10 +166,9 @@ export interface SkillGroup {
 /* ------------------------------------------------------------------ */
 
 export interface PersonalRecord {
-  icon: string;
   title: Localized;
   description: Localized;
-  /** Optional cover art path in /public; falls back to the emoji tile. */
+  /** Optional cover art path in /public; falls back to a gradient tile. */
   image?: string;
 }
 

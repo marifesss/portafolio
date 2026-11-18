@@ -37,9 +37,6 @@ export function DiagramPlaceholder({
       </svg>
 
       <div className="relative flex flex-col items-center gap-2 px-4 text-center">
-        <span aria-hidden className="text-3xl opacity-70">
-          🗺️
-        </span>
         <span className="text-sm font-medium text-muted">{label}</span>
       </div>
     </div>

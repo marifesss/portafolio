@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useId, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { certifications } from "@/content/certifications";
+import { ArrowUpRightIcon } from "@/components/ui/icons";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 /**
@@ -113,9 +114,10 @@ export function CertificationsTrack() {
                         href={cert.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-2 inline-flex text-sm font-semibold text-spotify transition-colors hover:text-white"
+                        className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-spotify transition-colors hover:text-white"
                       >
-                        {t.viewCertificate} ↗
+                        {t.viewCertificate}
+                        <ArrowUpRightIcon />
                       </a>
                     )}
                   </div>

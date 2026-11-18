@@ -1,7 +1,7 @@
 interface AlbumArtPlaceholderProps {
   /** Side length in px. Default 48 (sidebar thumbnail size). */
   size?: number;
-  /** Glyph centered on the cover. Default a music note. */
+  /** Optional glyph centered on the cover; plain gradient when omitted. */
   glyph?: string;
   /** `square` = rounded album cover; `circle` = artist/profile avatar. */
   shape?: "square" | "circle";
@@ -23,8 +23,8 @@ interface AlbumArtPlaceholderProps {
  * "coming soon" cover and anywhere real art hasn't arrived yet.
  */
 export function AlbumArtPlaceholder({
+  glyph,
   size = 48,
-  glyph = "🎵",
   shape = "square",
   hue = 210,
   fill = false,
@@ -50,12 +50,16 @@ export function AlbumArtPlaceholder({
         backgroundImage: `linear-gradient(135deg, ${from}, ${to})`,
       }}
     >
-      <span
-        aria-hidden
-        style={fill ? { lineHeight: 1 } : { fontSize: size * 0.4, lineHeight: 1 }}
-      >
-        {glyph}
-      </span>
+      {glyph && (
+        <span
+          aria-hidden
+          style={
+            fill ? { lineHeight: 1 } : { fontSize: size * 0.4, lineHeight: 1 }
+          }
+        >
+          {glyph}
+        </span>
+      )}
     </div>
   );
 }

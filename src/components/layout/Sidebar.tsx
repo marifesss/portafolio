@@ -80,9 +80,7 @@ export function Sidebar() {
                         ? "bg-white/15"
                         : "bg-white/5 group-hover:bg-white/10"
                     }`}
-                  >
-                    {item.icon}
-                  </span>
+                  />
                 )}
                 <span className="truncate">{pick(item.label)}</span>
               </Link>

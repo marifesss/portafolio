@@ -3,7 +3,6 @@ import type { PersonalRecord } from "@/lib/types";
 /** "Récords personales" — the "B-sides / Fuera del código" playlist. */
 export const records: PersonalRecord[] = [
   {
-    icon: "🎓",
     title: { es: "Educación", en: "Education" },
     image: "/images/covers/educacion.jpeg",
     description: {
@@ -12,7 +11,6 @@ export const records: PersonalRecord[] = [
     },
   },
   {
-    icon: "🌍",
     title: { es: "Idiomas", en: "Languages" },
     image: "/images/covers/idiomas.jpeg",
     description: {
@@ -21,7 +19,6 @@ export const records: PersonalRecord[] = [
     },
   },
   {
-    icon: "🏆",
     title: { es: "Logros académicos", en: "Academic achievements" },
     image: "/images/covers/logrosacademicos.jpeg",
     description: {
@@ -30,7 +27,6 @@ export const records: PersonalRecord[] = [
     },
   },
   {
-    icon: "🎻",
     title: { es: "Música", en: "Music" },
     image: "/images/covers/musica.jpeg",
     description: {
@@ -39,7 +35,6 @@ export const records: PersonalRecord[] = [
     },
   },
   {
-    icon: "🎾",
     title: { es: "Deporte", en: "Sports" },
     image: "/images/covers/deporte.jpeg",
     description: {
@@ -48,7 +43,6 @@ export const records: PersonalRecord[] = [
     },
   },
   {
-    icon: "💻",
     title: { es: "Voluntariado", en: "Volunteering" },
     image: "/images/covers/voluntariado.jpeg",
     description: {
