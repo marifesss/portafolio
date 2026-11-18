@@ -135,7 +135,7 @@ export function HomeSection() {
   const browseItems = navigation.filter((item) => item.href !== "/");
 
   return (
-    <SectionTransition className="px-gutter pb-section pt-section">
+    <SectionTransition className="px-gutter pb-section pt-top">
       {/* Search field — dark, modern Spotify-style pill pinned near the top. */}
       <form role="search" onSubmit={(e) => e.preventDefault()}>
         <div className="group/search relative max-w-2xl">

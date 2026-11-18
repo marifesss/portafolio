@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { LanguageToggle } from "./LanguageToggle";
-import { MobileTabBar } from "./MobileTabBar";
+import { MobileNav } from "./MobileNav";
 import { PlayerBar } from "./PlayerBar";
 import { ScrollArea } from "./ScrollArea";
 import { Sidebar } from "./Sidebar";
@@ -12,13 +12,13 @@ import { Sidebar } from "./Sidebar";
  * pinned to the bottom. Only `children` (the current route's page) changes on
  * navigation; the panels and the ~8px black gutters between them stay put.
  *
- * Below `md` the sidebar is hidden and navigation moves to a bottom
- * `MobileTabBar`; the layout stacks main → player → tab bar (each an `auto`
- * grid row, the tab bar collapsing to zero on desktop).
+ * Below `md` the sidebar is hidden: it opens instead as a drawer from the
+ * left via `MobileNav` (the menu button at the top-left), so the
+ * bottom of the screen holds only the player.
  */
 export function AppShell({ children }: { children: ReactNode }) {
   return (
-    <div className="grid h-dvh grid-rows-[1fr_auto_auto] bg-black text-white">
+    <div className="grid h-dvh grid-rows-[1fr_auto] bg-black text-white">
       {/* Sidebar + main float on the black frame with ~8px gutters. The sidebar
           tracks the viewport rather than stepping at two breakpoints — pinned
           at 21rem it ate a quarter of a laptop screen. 17vw keeps it near
@@ -30,11 +30,12 @@ export function AppShell({ children }: { children: ReactNode }) {
         </aside>
 
         <ScrollArea className="surface-panel min-h-0 scroll-smooth overflow-y-auto rounded-lg">
-          {/* Sticky top-right toggle: stays pinned while the panel scrolls, but
-              takes no layout space (the negative margin cancels its height) so
-              it overlays each section's own top padding instead of overlapping
-              the content below. */}
-          <div className="pointer-events-none sticky top-0 z-20 -mb-14 flex h-14 justify-end px-4 pt-4 sm:px-6">
+          {/* Sticky top row (mobile menu button left, language toggle right):
+              stays pinned while the panel scrolls, but takes no layout space
+              (the negative margin cancels its height) so it overlays each
+              section's own top padding instead of overlapping the content. */}
+          <div className="pointer-events-none sticky top-0 z-20 -mb-14 flex h-14 items-start justify-end px-4 pt-4 sm:px-6">
+            <MobileNav />
             <LanguageToggle className="pointer-events-auto" />
           </div>
           {children}
@@ -42,7 +43,6 @@ export function AppShell({ children }: { children: ReactNode }) {
       </div>
 
       <PlayerBar />
-      <MobileTabBar />
     </div>
   );
 }
