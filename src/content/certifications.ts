@@ -9,8 +9,8 @@ export const certifications: Certification[] = [
   {
     id: "efset",
     name: {
-      es: "EF SET English Certificate — C2 Proficient",
-      en: "EF SET English Certificate — C2 Proficient",
+      es: "EF SET English Certificate (C2 Proficient)",
+      en: "EF SET English Certificate (C2 Proficient)",
     },
     issuer: "EF SET",
     date: { es: "Vigente", en: "Current" },
@@ -24,8 +24,8 @@ export const certifications: Certification[] = [
   {
     id: "sql-total",
     name: {
-      es: "SQL TOTAL — Domina Bases de Datos de 0 a Avanzado",
-      en: "SQL TOTAL — Databases from Zero to Advanced",
+      es: "SQL TOTAL: Domina Bases de Datos de 0 a Avanzado",
+      en: "SQL TOTAL: Databases from Zero to Advanced",
     },
     issuer: "Udemy",
     date: { es: "Septiembre 2025", en: "September 2025" },
@@ -39,7 +39,7 @@ export const certifications: Certification[] = [
       es: "Figma para no Diseñadores",
       en: "Figma para no Diseñadores (Figma for non-designers)",
     },
-    issuer: "UCAB — Dirección General de Desarrollo Estudiantil",
+    issuer: "UCAB, Dirección General de Desarrollo Estudiantil",
     date: { es: "Diciembre 2025", en: "December 2025" },
     detail: { es: "3 horas académicas", en: "3 academic hours" },
     image: "/images/certificaciones/figma-no-disenadores.png",

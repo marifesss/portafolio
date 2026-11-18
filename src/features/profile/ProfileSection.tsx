@@ -12,8 +12,7 @@ import { useLanguage } from "@/i18n/LanguageProvider";
 
 /**
  * The "Perfil" (About) view, modeled on the Spotify Profile page: a circular
- * avatar + huge name header, an internship-availability callout, the bilingual
- * bio, then "Géneros" rendered as circular "top artist" items.
+ * avatar + huge name header, the bilingual bio, then "Géneros" rendered as circular "top artist" items.
  */
 export function ProfileSection() {
   const { pick, t } = useLanguage();
@@ -45,17 +44,6 @@ export function ProfileSection() {
       </header>
 
       <SectionTransition className="space-y-8 px-gutter pb-section">
-        {/* Internship-availability callout — the loudest signal on the page. */}
-        <div className="flex items-center gap-3 rounded-lg border border-spotify/40 bg-spotify/10 px-5 py-4">
-          <span aria-hidden className="relative flex h-2.5 w-2.5 shrink-0">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-spotify opacity-75" />
-            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-spotify" />
-          </span>
-          <p className="text-sm font-semibold text-spotify">
-            {pick(profile.availability)}
-          </p>
-        </div>
-
         {/* Bilingual bio. */}
         <div className="space-y-6">
           {pick(profile.bio)

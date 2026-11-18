@@ -20,11 +20,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(`https://${site.domain}`),
   title: {
     // Home uses the default; other routes fill "%s" with their section name.
-    default: `${site.name} — Portafolio`,
+    default: `${site.name} | Portafolio`,
     template: `%s · ${site.name}`,
   },
   description: site.tagline.es,
-  applicationName: `${site.name} — Portafolio`,
+  applicationName: `${site.name} | Portafolio`,
   authors: [{ name: site.name }],
 };
 

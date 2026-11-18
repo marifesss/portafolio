@@ -125,8 +125,11 @@ export interface ExperienceHighlight {
   description: Localized;
 }
 
-export interface Experience {
-  company: string;
+/**
+ * One position held at a company. Several roles at the same company render
+ * as a LinkedIn-style timeline under a single company header.
+ */
+export interface ExperienceRole {
   role: Localized;
   period: Localized;
   description: Localized;
@@ -136,10 +139,19 @@ export interface Experience {
   reach?: Localized;
   /** Data / BI tooling chips (SQL Server DW, ETL, Power BI…). */
   tools?: string[];
+  /** The role's headline "tracks". */
+  highlights: ExperienceHighlight[];
+}
+
+/** A company "album": shown once, with every role held there below it. */
+export interface Experience {
+  company: string;
   /** Optional "label" artwork path in /public (company logo / cover). */
   cover?: string;
-  /** The album's headline "tracks". */
-  highlights: ExperienceHighlight[];
+  /** Total time at the company, e.g. "Agosto 2025 — presente". */
+  tenure: Localized;
+  /** Roles held at the company, most recent first. */
+  roles: ExperienceRole[];
 }
 
 /* ------------------------------------------------------------------ */
