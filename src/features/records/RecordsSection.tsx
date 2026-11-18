@@ -54,7 +54,6 @@ export function RecordsSection() {
             ) : (
               <AlbumArtPlaceholder
                 size={68}
-                glyph={record.icon}
                 hue={RECORD_HUES[i % RECORD_HUES.length]}
               />
             )}

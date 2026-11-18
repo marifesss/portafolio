@@ -1,7 +1,7 @@
 interface IconLinkProps {
   href: string;
-  /** Glyph/emoji shown on the left. */
-  icon: string;
+  /** Optional glyph shown on the left. */
+  icon?: React.ReactNode;
   /** Already-resolved label — sections resolve `Localized` before passing it. */
   label: string;
   /** Optional muted hint on the right (e.g. the URL host or "GitHub"). */
@@ -31,9 +31,11 @@ export function IconLink({
       {...externalProps}
       className="group flex items-center gap-3 rounded-md px-3 py-2 text-muted transition-colors hover:bg-white/5 hover:text-white"
     >
-      <span aria-hidden className="text-lg">
-        {icon}
-      </span>
+      {icon && (
+        <span aria-hidden className="text-lg">
+          {icon}
+        </span>
+      )}
       <span className="font-medium">{label}</span>
       {hint && (
         <span className="ml-auto text-sm text-faint group-hover:text-muted">

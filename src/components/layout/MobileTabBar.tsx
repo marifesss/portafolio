@@ -40,7 +40,8 @@ export function MobileTabBar() {
   // Close the overflow menu on Escape.
   useEffect(() => {
     if (!moreOpen) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMoreOpen(false);
+    const onKey = (e: KeyboardEvent) =>
+      e.key === "Escape" && setMoreOpen(false);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [moreOpen]);
@@ -85,11 +86,7 @@ export function MobileTabBar() {
                           height={36}
                           className="h-9 w-9 shrink-0 rounded object-cover ring-1 ring-black/20"
                         />
-                      ) : (
-                        <span aria-hidden className="text-lg">
-                          {item.icon}
-                        </span>
-                      )}
+                      ) : null}
                       {pick(item.label)}
                     </Link>
                   </li>
@@ -122,11 +119,7 @@ export function MobileTabBar() {
                         : "opacity-70 ring-1 ring-black/20"
                     }`}
                   />
-                ) : (
-                  <span aria-hidden className="text-xl">
-                    {item.icon}
-                  </span>
-                )}
+                ) : null}
                 <span className="max-w-full truncate">{pick(item.label)}</span>
               </Link>
             </li>

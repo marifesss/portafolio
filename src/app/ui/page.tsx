@@ -69,16 +69,16 @@ export default function UIGalleryPage() {
       <Row title="Album art placeholders">
         <div className="flex flex-wrap items-end gap-4">
           <AlbumArtPlaceholder size={48} hue={140} />
-          <AlbumArtPlaceholder size={80} hue={280} glyph="🎮" />
-          <AlbumArtPlaceholder size={120} hue={20} shape="circle" glyph="🧑‍💻" />
+          <AlbumArtPlaceholder size={80} hue={280} />
+          <AlbumArtPlaceholder size={120} hue={20} shape="circle" />
         </div>
       </Row>
 
       <Row title="Icon links">
         <div className="max-w-md">
-          <IconLink href="https://github.com" icon="🐙" label="GitHub" hint="repo" />
-          <IconLink href="https://figma.com" icon="🎨" label="Figma" hint="design" />
-          <IconLink href="mailto:a@b.com" icon="✉️" label="Email" external={false} />
+          <IconLink href="https://github.com" label="GitHub" hint="repo" />
+          <IconLink href="https://figma.com" label="Figma" hint="design" />
+          <IconLink href="mailto:a@b.com" label="Email" external={false} />
         </div>
       </Row>
 

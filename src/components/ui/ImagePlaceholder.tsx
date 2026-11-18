@@ -1,7 +1,7 @@
 interface ImagePlaceholderProps {
   /** Already-resolved caption, e.g. "Screenshots coming soon". */
   label: string;
-  /** Glyph shown above the label. Default a framed-picture glyph. */
+  /** Optional glyph shown above the label. */
   glyph?: string;
   /** CSS aspect-ratio string, e.g. "16/9" (default) or "9/19" for phones. */
   aspect?: string;
@@ -14,8 +14,8 @@ interface ImagePlaceholderProps {
  * render this instead of an `<img>` when a project has no screenshots.
  */
 export function ImagePlaceholder({
+  glyph,
   label,
-  glyph = "🖼️",
   aspect = "16/9",
   className = "",
 }: ImagePlaceholderProps) {
@@ -25,9 +25,11 @@ export function ImagePlaceholder({
       className={`grid place-items-center rounded-lg border border-dashed border-white/15 bg-elevated text-center ${className}`}
     >
       <div className="flex flex-col items-center gap-2 px-4">
-        <span aria-hidden className="text-3xl opacity-70">
-          {glyph}
-        </span>
+        {glyph && (
+          <span aria-hidden className="text-3xl opacity-70">
+            {glyph}
+          </span>
+        )}
         <span className="text-sm font-medium text-muted">{label}</span>
       </div>
     </div>

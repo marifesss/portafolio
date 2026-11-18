@@ -51,7 +51,6 @@ export function ProjectsSection() {
             ) : (
               <AlbumArtPlaceholder
                 fill
-                glyph="🎧"
                 hue={145}
                 label={t.projectsTitle}
               />

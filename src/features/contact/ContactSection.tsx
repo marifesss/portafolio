@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { contactChannels, contactHeading } from "@/content/contact";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { ArrowRightIcon } from "@/components/ui/icons";
 import { useSectionMotion } from "@/components/motion/SectionTransition";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
@@ -37,9 +38,7 @@ export function ContactSection() {
                   <span className="min-w-0 truncate font-semibold text-white">
                     {channel.label}
                   </span>
-                  <span aria-hidden className="ml-auto text-faint">
-                    →
-                  </span>
+                  <ArrowRightIcon className="ml-auto text-faint" />
                 </a>
               </motion.li>
             );
