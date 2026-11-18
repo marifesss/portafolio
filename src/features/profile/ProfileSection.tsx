@@ -21,7 +21,7 @@ export function ProfileSection() {
   return (
     <article>
       {/* Artist header: circle avatar · eyebrow · huge name · meta line. */}
-      <header className="flex flex-col items-center gap-6 bg-gradient-to-b from-spotify/25 to-transparent px-gutter pb-8 pt-section text-center sm:flex-row sm:items-end sm:gap-8 sm:text-left">
+      <header className="flex flex-col items-center gap-6 bg-gradient-to-b from-spotify/25 to-transparent px-gutter pb-8 pt-top text-center sm:flex-row sm:items-end sm:gap-8 sm:text-left">
         <Image
           src="/images/mariana/perfil.jpeg"
           alt={site.name}

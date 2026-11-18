@@ -293,7 +293,7 @@ export function PlayerBar() {
   const level = muted ? 0 : volume;
 
   return (
-    <footer className="border-t border-white/5 bg-base">
+    <footer className="border-t border-white/5 bg-base pb-[env(safe-area-inset-bottom)] md:pb-0">
       <audio
         ref={audioRef}
         src={track.preview}

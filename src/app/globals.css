@@ -80,12 +80,24 @@
    * `pt-section` / `px-gutter` / `pb-section`. */
   --spacing-section: clamp(1.5rem, 6vh, 5rem);
   --spacing-gutter: clamp(1.25rem, 3vw, 2.5rem);
+  /* Top padding of every page header (`pt-top`). Same as `section` on
+     desktop; on phones it clears the sticky menu button + language toggle
+     row (16px inset + 40px button), which overlays the header. */
+  --spacing-top: max(4.5rem, var(--spacing-section));
 
   /* The two pieces of oversized art that set each header's height. Fixed at
      208px they ate 40% of a laptop panel's visible height before a word of
      copy. `size-avatar` (profile) / `w-cover` (album-style project headers). */
   --spacing-avatar: clamp(8rem, calc(9.5 * var(--fluid)), 13rem);
   --spacing-cover: clamp(8.5rem, calc(11 * var(--fluid)), 13rem);
+}
+
+/* From `md` up there's no menu button (the sidebar is visible), so page
+   headers go back to the regular section rhythm. */
+@media (width >= 48rem) {
+  :root {
+    --spacing-top: var(--spacing-section);
+  }
 }
 
 /* ---------------------------------------------------------------------------
