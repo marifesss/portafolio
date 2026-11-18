@@ -2,8 +2,8 @@ import type { Localized } from "@/lib/types";
 
 /**
  * Home ("Inicio") copy — kept as data so the landing hero renders from content,
- * never hardcoded in JSX. Holds the time-aware greeting variants, the
- * availability signal, and which projects to surface as quick-access cards.
+ * never hardcoded in JSX. Holds the time-aware greeting variants
+ * and which projects to surface as quick-access cards.
  */
 
 /** Spotify-style daypart buckets for the greeting. */
@@ -17,12 +17,4 @@ export const greetings: Record<Daypart, Localized> = {
 };
 
 /** Slugs of the projects surfaced as featured cards on Home, in display order. */
-export const featuredSlugs = ["yelou", "arrowmaze", "partela"] as const;
-
-export const home = {
-  /** Subtle "open to work" signal shown in the hero. */
-  availability: {
-    es: "Disponible para nuevas oportunidades",
-    en: "Available for new opportunities",
-  } satisfies Localized,
-} as const;
+export const featuredSlugs = ["alo-mama", "partela", "yelou", "arrowmaze"] as const;
