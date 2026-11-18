@@ -47,7 +47,8 @@ Deliberately layered — the codebase itself is a showcase of clean structure:
 - **Partela** — cover art / placeholder for the "coming soon" state. _(Waitlist
   form wired to Web3Forms via `src/content/notify.ts`; emptying the key there
   falls the bell back to `mailto:`.)_
-- **Mondelēz experience** — update end date once confirmed.
+- **Mondelēz experience** — confirm the internship end month (assumed July 2026; the
+  Commercial Projects Analyst role started August 2026). Add highlights/tools to the analyst role as projects ship.
 
 When new assets or content arrive, update the matching file in `src/content` and remove the
 corresponding `// TODO` marker — keep content and code in sync.

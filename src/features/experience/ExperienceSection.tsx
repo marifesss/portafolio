@@ -24,7 +24,7 @@ export function ExperienceSection() {
       <div className="space-y-12 px-gutter pb-section">
         {experience.map((job) => (
           <motion.article
-            key={job.company}
+            key={`${job.company}-${job.role.en}`}
             variants={m.fadeSlideIn}
             initial="hidden"
             animate="visible"
